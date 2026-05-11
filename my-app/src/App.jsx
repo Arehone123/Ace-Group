@@ -585,7 +585,7 @@ export default function App() {
           Let's create impact together across Africa and beyond.
         </p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="mailto:hello@acegroup.co.za" className="btn-primary">Contact Us</a>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
           <a href="#services" className="btn-ghost">View Services</a>
         </div>
       </section>
