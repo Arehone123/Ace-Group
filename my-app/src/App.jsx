@@ -563,19 +563,33 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      
+      <section id="contact" className="cta-section">
+        <div className="section-tag" style={{ justifyContent: "center" }}>Reach Out</div>
+        <h2 className="cta-title">Let's Work Together</h2>
+        <p className="cta-sub">Send us a message and we’ll get back to you.</p>
+
+        <form className="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required />
+          <button type="submit" className="btn-primary">Send Message</button>
+        </form>
+      </section>
+
       <footer className="footer">
-        <div className="footer-logo">
-          ACE <span>GROUP</span>
-          <div style={{ fontSize: "0.68rem", letterSpacing: "0.14em", color: "var(--text-muted)", marginTop: "0.3rem", fontFamily: "'Outfit', sans-serif", fontWeight: 300 }}>
-            OF COMPANIES
+        <div className="footer-top">
+          <div className="footer-logo">ACE <span>GROUP</span></div>
+          <div className="footer-social">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter/X</a>
           </div>
         </div>
-        <div className="footer-copy">© {new Date().getFullYear()} Ace Group of Companies. South Africa.</div>
-        <div className="footer-links">
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Ace Group of Companies</span>
+          <span>South Africa</span>
         </div>
       </footer>
     </>
