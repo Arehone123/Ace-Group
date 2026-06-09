@@ -897,12 +897,12 @@ function EventsPage({ onNavigate, scrolled }) {
               </div>
               <div className="event-actions">
                 <a
-                  href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScS5oj5yNyglolQuy6M5AiRhr5ugcc3g2zjgPaeW1lYEdcl4w/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="whatsapp-btn"
                 >
-                  📱 Register via WhatsApp
+                  📱 Fill the form
                 </a>
                 <button className="btn-ghost" onClick={() => document.getElementById("bootcamp-phases")?.scrollIntoView({ behavior: "smooth" })}>
                   View Curriculum
