@@ -989,7 +989,7 @@ function EventsPage({ onNavigate, scrolled }) {
           <a href="mailto:aceacademia2022@gmail.com" className="btn-ghost">Email Us Instead</a>
         </div>
         <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", textAlign: "center" }}>
-          Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment · 1 Aug – 6 Sep 2026
+          Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment or 2 payment plan of 360 on the first week and 4th week · 1 Aug – 6 Sep 2026
         </p>
       </section>
 
@@ -1074,7 +1074,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
 
           <h2>3. Registration and Enrolment</h2>
           <ul>
-            <li>Registration is confirmed upon receipt of full payment of <strong>R720.00</strong></li>
+            <li>Registration is confirmed upon receipt of full payment or  <strong>R360.00 </strong> deposit of <strong>R720.00</strong></li>
             <li>Spots are limited and allocated on a first-come, first-served basis</li>
             <li>You will receive confirmation and joining details via WhatsApp or email within 48 hours of payment</li>
             <li>You must be at least 16 years of age to enrol, or have parental/guardian consent</li>
@@ -1442,7 +1442,7 @@ function HomePage({ onNavigate, scrolled }) {
           </div>
           <div>
             <span style={{ fontWeight: 500, color: "var(--text-primary)", fontSize: "0.9rem" }}>AI n8n Automation Bootcamp</span>
-            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>1 Aug – 6 Sep 2026 · R720 · Limited Spots</span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>1 Aug – 6 Sep 2026 · R720 / 360 Deposit· Limited Spots</span>
           </div>
         </div>
         <span style={{ color: "var(--purple-light)", fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>View Event →</span>
