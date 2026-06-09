@@ -978,15 +978,15 @@ function EventsPage({ onNavigate, scrolled }) {
         </p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "1.5rem" }}>
           <a
-            href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScS5oj5yNyglolQuy6M5AiRhr5ugcc3g2zjgPaeW1lYEdcl4w/viewform"
             target="_blank"
             rel="noopener noreferrer"
             className="whatsapp-btn"
             style={{ fontSize: "0.95rem", padding: "1.1rem 2.4rem" }}
           >
-            📱 WhatsApp: 073 929 8456
+            form
           </a>
-          <a href="mailto:4148924@myuwc.ac.za" className="btn-ghost">Email Us Instead</a>
+          <a href="mailto:aceacademia2022@gmail.com" className="btn-ghost">Email Us Instead</a>
         </div>
         <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", textAlign: "center" }}>
           Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment · 1 Aug – 6 Sep 2026
@@ -1048,7 +1048,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>We retain your personal information for as long as necessary to fulfil the purposes outlined in this policy, or as required by law. Registration and payment records are retained for a minimum of 5 years for accounting and legal purposes.</p>
 
           <h2>6. Your Rights under POPIA</h2>
-          <p>You have the right to access, correct, or request deletion of your personal information. You may also object to processing or withdraw consent at any time. To exercise these rights, contact us at <strong>4148924@myuwc.ac.za</strong>.</p>
+          <p>You have the right to access, correct, or request deletion of your personal information. You may also object to processing or withdraw consent at any time. To exercise these rights, contact us at <strong>aceacademia2022@gmail.com</strong>.</p>
 
           <h2>7. Cookies</h2>
           <p>Our website may use cookies to improve your browsing experience. You can disable cookies through your browser settings, though this may affect certain website functionality.</p>
@@ -1057,7 +1057,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction.</p>
 
           <h2>9. Contact Us</h2>
-          <p>For any privacy-related queries, please contact us at: <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <p>For any privacy-related queries, please contact us at: <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1102,7 +1102,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>We reserve the right to update these Terms at any time. Continued use of our services following notification of changes constitutes acceptance of the revised Terms.</p>
 
           <h2>11. Contact</h2>
-          <p>Questions about these Terms? Contact us at <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <p>Questions about these Terms? Contact us at <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1142,7 +1142,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <h2>8. How to Request a Refund</h2>
           <p>To request a refund, contact us via:</p>
           <ul>
-            <li>Email: <strong>4148924@myuwc.ac.za</strong></li>
+            <li>Email: <strong>aceacademia2022@gmail.com</strong></li>
             <li>WhatsApp: <strong>073 929 8456</strong></li>
           </ul>
           <p>Please include your full name, registration details, and reason for cancellation. Refunds will be processed to the original payment method within <strong>7–10 business days</strong> of approval.</p>
@@ -1207,7 +1207,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>In the event of unforeseen technical disruptions to a live session, the session will be rescheduled and participants notified via WhatsApp as soon as possible. Recordings will be provided in the interim.</p>
 
           <h2>8. Contact</h2>
-          <p>For delivery queries, contact us at <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <p>For delivery queries, contact us at <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1365,7 +1365,7 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         <h2 className="cta-title">Interested in<br /><em>{division.name}?</em></h2>
         <p className="cta-sub">Reach out to the Ace Group team and let's explore how our {division.name} division can serve your needs.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
-          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
+          <a href="mailto:aceacademia2022@gmail.com" className="btn-primary">Contact Us</a>
           <button className="btn-ghost" onClick={onBack}>All Divisions</button>
         </div>
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
@@ -1498,7 +1498,7 @@ function HomePage({ onNavigate, scrolled }) {
         <h2 className="cta-title">Ready to Build<br /><em>Something Great?</em></h2>
         <p className="cta-sub">Whether you're a partner, investor, or client — we'd love to hear from you. Let's create impact together across Africa and beyond.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
-          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
+          <a href="mailto:aceacademia2022@gmail.com" className="btn-primary">Contact Us</a>
           <a href="#services" className="btn-ghost">View Services</a>
         </div>
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
