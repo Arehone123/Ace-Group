@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap');
@@ -17,6 +17,9 @@ const styles = `
     --text-muted: #8A8A96;
     --border: rgba(201, 151, 58, 0.18);
     --border-dim: rgba(255,255,255,0.06);
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-dim: rgba(124,58,237,0.15);
   }
 
   html { scroll-behavior: smooth; }
@@ -53,7 +56,7 @@ const styles = `
     font-size: 0.82rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--text-muted); text-decoration: none; transition: color 0.3s; cursor: pointer;
   }
-  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
   .nav-cta {
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--dark); background: var(--gold); border: none;
@@ -244,23 +247,28 @@ const styles = `
 
   /* ── CONTACT FORM ── */
   .contact-form { max-width: 700px; margin: 0 auto; display: grid; gap: 1rem; }
-  .contact-form input, .contact-form textarea {
+  .contact-form input, .contact-form textarea, .contact-form select {
     background: var(--dark-3); border: 1px solid var(--border-dim);
     padding: 1rem; color: white; font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-    outline: none; transition: border-color 0.3s;
+    outline: none; transition: border-color 0.3s; width: 100%;
   }
-  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--gold); }
   .contact-form textarea { min-height: 140px; resize: vertical; }
+  .contact-form select { appearance: none; cursor: pointer; }
+  .contact-form select option { background: var(--dark-3); }
 
   /* ── FOOTER ── */
   .footer { border-top: 0.5px solid var(--border-dim); padding: 3rem 4rem; display: flex; flex-direction: column; gap: 2rem; }
-  .footer-top { display: flex; justify-content: space-between; align-items: center; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.08em; cursor: pointer; }
   .footer-logo span { color: var(--gold); }
   .footer-social { display: flex; gap: 1.5rem; }
   .footer-social a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: color 0.3s; }
   .footer-social a:hover { color: var(--gold-light); }
-  .footer-bottom { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; transition: color 0.3s; cursor: pointer; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 1rem; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -275,22 +283,16 @@ const styles = `
     from { opacity: 0; }
     to   { opacity: 1; }
   }
-
-  /* ── PAGE TRANSITION ── */
   .page-enter { animation: fadeIn 0.5s ease both; }
 
-  /* ═══════════════════════════════════════════════════
+  /* ═══════════════════════════════
      DIVISION PAGE STYLES
-  ═══════════════════════════════════════════════════ */
-
-  /* Division Hero */
+  ═══════════════════════════════ */
   .div-hero {
     min-height: 80vh; display: flex; flex-direction: column; justify-content: flex-end;
     padding: 0 4rem 5rem; position: relative; overflow: hidden;
   }
-  .div-hero-bg {
-    position: absolute; inset: 0;
-  }
+  .div-hero-bg { position: absolute; inset: 0; }
   .div-hero-grid {
     position: absolute; inset: 0; pointer-events: none;
     background-image: linear-gradient(rgba(201,151,58,0.03) 1px, transparent 1px),
@@ -321,121 +323,188 @@ const styles = `
     position: relative; font-size: 1.05rem; color: var(--text-muted); max-width: 560px;
     line-height: 1.8; animation: fadeUp 0.8s 0.15s ease both;
   }
-
-  /* Division accent strip */
-  .div-accent {
-    height: 3px; width: 100%;
-    background: linear-gradient(90deg, var(--gold), rgba(201,151,58,0.1) 60%, transparent);
-  }
-
-  /* Overview block */
-  .div-overview {
-    padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start;
-  }
-  .div-overview-left {}
-  .div-big-number {
-    font-family: 'Cormorant Garamond', serif; font-size: 9rem; font-weight: 300;
-    color: rgba(201,151,58,0.1); line-height: 1; letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-  }
-  .div-overview-right p {
-    font-size: 1rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.4rem;
-  }
+  .div-accent { height: 3px; width: 100%; background: linear-gradient(90deg, var(--gold), rgba(201,151,58,0.1) 60%, transparent); }
+  .div-overview { padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start; }
+  .div-big-number { font-family: 'Cormorant Garamond', serif; font-size: 9rem; font-weight: 300; color: rgba(201,151,58,0.1); line-height: 1; letter-spacing: -0.04em; margin-bottom: 1.5rem; }
+  .div-overview-right p { font-size: 1rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 1.4rem; }
   .div-overview-right p strong { color: var(--text-primary); font-weight: 500; }
-
-  /* Feature pillars */
-  .div-pillars {
-    padding: 0 4rem 6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: var(--border-dim); border: 0.5px solid var(--border-dim);
-  }
-  .div-pillar {
-    background: var(--dark-2); padding: 2.5rem 2rem; position: relative;
-    transition: background 0.3s;
-  }
+  .div-pillars { padding: 0 4rem 6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
+  .div-pillar { background: var(--dark-2); padding: 2.5rem 2rem; position: relative; transition: background 0.3s; }
   .div-pillar:hover { background: var(--dark-3); }
-  .div-pillar-icon {
-    font-size: 2rem; margin-bottom: 1.2rem; display: block;
-  }
-  .div-pillar-title {
-    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400;
-    margin-bottom: 0.7rem;
-  }
+  .div-pillar-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+  .div-pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.7rem; }
   .div-pillar-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; }
-
-  /* Offerings list */
-  .div-offerings {
-    padding: 6rem 4rem; background: var(--dark-2);
-    border-top: 0.5px solid var(--border-dim); border-bottom: 0.5px solid var(--border-dim);
-  }
+  .div-offerings { padding: 6rem 4rem; background: var(--dark-2); border-top: 0.5px solid var(--border-dim); border-bottom: 0.5px solid var(--border-dim); }
   .div-offerings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
-  .div-offering-item {
-    padding: 2rem 0; border-bottom: 0.5px solid var(--border-dim);
-    display: flex; align-items: flex-start; gap: 1.2rem;
-    padding-right: 3rem;
-  }
+  .div-offering-item { padding: 2rem 0; border-bottom: 0.5px solid var(--border-dim); display: flex; align-items: flex-start; gap: 1.2rem; padding-right: 3rem; }
   .div-offering-item:nth-child(odd) { padding-right: 3rem; border-right: 0.5px solid var(--border-dim); }
   .div-offering-item:nth-child(even) { padding-left: 3rem; }
-  .div-offering-num {
-    font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold);
-    font-weight: 400; letter-spacing: 0.05em; flex-shrink: 0; padding-top: 0.15rem;
-  }
+  .div-offering-num { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); font-weight: 400; letter-spacing: 0.05em; flex-shrink: 0; padding-top: 0.15rem; }
   .div-offering-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; }
   .div-offering-text { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; }
-
-  /* Stats row */
-  .div-stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    border-bottom: 0.5px solid var(--border-dim);
-  }
-  .div-stat {
-    padding: 3rem 2rem; text-align: center;
-    border-right: 0.5px solid var(--border-dim);
-  }
+  .div-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 0.5px solid var(--border-dim); }
+  .div-stat { padding: 3rem 2rem; text-align: center; border-right: 0.5px solid var(--border-dim); }
   .div-stat:last-child { border-right: none; }
-  .div-stat-num {
-    font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300;
-    color: var(--gold-light); line-height: 1; margin-bottom: 0.5rem;
-  }
+  .div-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 0.5rem; }
   .div-stat-lbl { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
-
-  /* Vision quote */
-  .div-quote-section {
-    padding: 7rem 4rem; position: relative; overflow: hidden;
-  }
-  .div-quote-section::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(201,151,58,0.05) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .div-quote {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.5vw, 3rem);
-    font-weight: 300; font-style: italic; line-height: 1.3; text-align: center;
-    max-width: 820px; margin: 0 auto; color: var(--text-primary); position: relative;
-  }
-  .div-quote::before {
-    content: '"'; display: block; font-size: 8rem; color: rgba(201,151,58,0.15);
-    line-height: 0.6; margin-bottom: 2rem; text-align: center;
-  }
-  .div-quote-attr {
-    text-align: center; margin-top: 2rem;
-    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
-  }
-
-  /* Related divisions */
+  .div-quote-section { padding: 7rem 4rem; position: relative; overflow: hidden; }
+  .div-quote-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(201,151,58,0.05) 0%, transparent 70%); pointer-events: none; }
+  .div-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3.5vw, 3rem); font-weight: 300; font-style: italic; line-height: 1.3; text-align: center; max-width: 820px; margin: 0 auto; color: var(--text-primary); position: relative; }
+  .div-quote::before { content: '"'; display: block; font-size: 8rem; color: rgba(201,151,58,0.15); line-height: 0.6; margin-bottom: 2rem; text-align: center; }
+  .div-quote-attr { text-align: center; margin-top: 2rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
   .div-related { padding: 6rem 4rem; }
   .div-related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border-dim); }
-  .div-related-card {
-    background: var(--dark-2); padding: 2.5rem; cursor: pointer; transition: background 0.3s;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  .div-related-card { background: var(--dark-2); padding: 2.5rem; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: space-between; }
   .div-related-card:hover { background: var(--dark-3); }
   .div-related-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
-  .div-related-name {
-    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400;
-  }
+  .div-related-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; }
   .div-related-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
   .div-related-arrow { color: var(--gold); font-size: 1.5rem; opacity: 0.5; transition: opacity 0.3s, transform 0.3s; }
   .div-related-card:hover .div-related-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ═══════════════════════════════
+     EVENTS PAGE STYLES
+  ═══════════════════════════════ */
+  .events-hero {
+    min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 5rem; position: relative; overflow: hidden;
+  }
+  .events-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 65% 30%, rgba(124,58,237,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,151,58,0.05) 0%, transparent 50%),
+      var(--dark);
+  }
+  .events-grid-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
+  .events-accent { height: 3px; width: 100%; background: linear-gradient(90deg, var(--purple), rgba(124,58,237,0.1) 60%, transparent); }
+
+  /* Event card */
+  .events-section { padding: 6rem 4rem; }
+  .event-featured {
+    border: 0.5px solid var(--border-dim); background: var(--dark-2);
+    position: relative; overflow: hidden; margin-bottom: 4rem;
+  }
+  .event-featured::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--gold), transparent);
+  }
+  .event-featured-inner {
+    display: grid; grid-template-columns: 1fr 380px; gap: 0;
+  }
+  .event-main { padding: 3.5rem; }
+  .event-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--purple-dim); border: 0.5px solid rgba(124,58,237,0.3);
+    padding: 0.4rem 1rem; font-size: 0.68rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--purple-light); margin-bottom: 1.5rem;
+  }
+  .event-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple-light); animation: pulse 2s infinite; }
+  .event-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 0.5rem;
+  }
+  .event-title em { font-style: italic; color: var(--purple-light); }
+  .event-subtitle { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .event-tagline { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; max-width: 500px; }
+  .event-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .event-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); }
+  .event-meta-item strong { color: var(--text-primary); font-weight: 500; }
+  .event-meta-icon { font-size: 1rem; }
+  .event-includes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+  .event-tag {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); border: 0.5px solid var(--border-dim);
+    padding: 0.3rem 0.8rem;
+  }
+  .event-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-purple {
+    font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: white;
+    background: var(--purple); border: none; padding: 1rem 2.4rem;
+    cursor: pointer; transition: background 0.3s, transform 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-purple:hover { background: #6D28D9; transform: translateY(-1px); }
+
+  /* Pricing panel */
+  .event-pricing {
+    background: var(--dark-3); border-left: 0.5px solid var(--border-dim);
+    padding: 3rem 2.5rem; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .pricing-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .pricing-amount {
+    font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300;
+    color: var(--gold-light); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .pricing-currency { font-size: 1.5rem; vertical-align: top; line-height: 1.5; color: var(--gold); }
+  .pricing-period { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 2rem; }
+  .pricing-features { list-style: none; text-align: left; width: 100%; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: var(--text-muted); }
+  .pricing-check { color: var(--gold); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.15rem; }
+  .pricing-note { font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 1rem; line-height: 1.6; }
+
+  /* Phases */
+  .phases-section { padding: 6rem 4rem; background: var(--dark-2); border-top: 0.5px solid var(--border-dim); border-bottom: 0.5px solid var(--border-dim); }
+  .phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
+  .phase-card { background: var(--dark-2); padding: 2.5rem 2rem; position: relative; transition: background 0.3s; }
+  .phase-card:hover { background: var(--dark-3); }
+  .phase-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: rgba(124,58,237,0.15); line-height: 1; margin-bottom: 0.5rem; }
+  .phase-days { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 1rem; }
+  .phase-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem; }
+  .phase-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .phase-list li { font-size: 0.8rem; color: var(--text-muted); padding-left: 1rem; position: relative; }
+  .phase-list li::before { content: '·'; position: absolute; left: 0; color: var(--purple-light); }
+
+  /* Register section */
+  .register-section { padding: 7rem 4rem; text-align: center; position: relative; overflow: hidden; }
+  .register-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(124,58,237,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: #25D366; color: white; font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.1em; padding: 1rem 2rem; cursor: pointer;
+    border: none; transition: background 0.3s, transform 0.2s; text-decoration: none;
+  }
+  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+
+  /* ═══════════════════════════════
+     LEGAL PAGE STYLES
+  ═══════════════════════════════ */
+  .legal-hero {
+    min-height: 40vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 4rem; position: relative; overflow: hidden;
+  }
+  .legal-hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 70% at 60% 30%, rgba(201,151,58,0.05) 0%, transparent 60%), var(--dark);
+  }
+  .legal-content { max-width: 860px; margin: 0 auto; padding: 5rem 4rem; }
+  .legal-content h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400;
+    color: var(--text-primary); margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+    border-bottom: 0.5px solid var(--border-dim);
+  }
+  .legal-content h2:first-child { margin-top: 0; }
+  .legal-content p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
+  .legal-content p strong { color: var(--text-primary); font-weight: 500; }
+  .legal-content ul { list-style: none; padding: 0; margin-bottom: 1rem; }
+  .legal-content ul li { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; padding-left: 1.2rem; position: relative; }
+  .legal-content ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 0.4rem; }
+  .legal-meta { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border-dim); }
+  .legal-nav { display: flex; gap: 2rem; flex-wrap: wrap; padding: 2rem 4rem; border-bottom: 0.5px solid var(--border-dim); background: var(--dark-2); }
+  .legal-nav a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.3s; text-decoration: none; }
+  .legal-nav a:hover, .legal-nav a.active { color: var(--gold-light); }
 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
@@ -462,6 +531,17 @@ const styles = `
     .div-related { padding: 4rem 1.5rem; }
     .div-related-grid { grid-template-columns: 1fr; }
     .div-quote { font-size: 1.4rem; }
+    .events-hero { padding: 0 1.5rem 4rem; min-height: 50vh; }
+    .events-section { padding: 3rem 1.5rem; }
+    .event-featured-inner { grid-template-columns: 1fr; }
+    .event-pricing { border-left: none; border-top: 0.5px solid var(--border-dim); }
+    .event-main { padding: 2rem 1.5rem; }
+    .phases-section { padding: 4rem 1.5rem; }
+    .phases-grid { grid-template-columns: 1fr; }
+    .register-section { padding: 4rem 1.5rem; }
+    .legal-hero { padding: 0 1.5rem 3rem; min-height: 30vh; }
+    .legal-content { padding: 3rem 1.5rem; }
+    .legal-nav { padding: 1.5rem; gap: 1rem; }
   }
 `;
 
@@ -656,63 +736,549 @@ const SERVICES = [
   },
 ];
 
+const BOOTCAMP_PHASES = [
+  {
+    number: "01",
+    days: "Day 1–2",
+    title: "Foundations",
+    items: ["Introduction to Workflow Automation", "Understanding n8n architecture", "Nodes, triggers, webhooks", "Real-world automation examples"],
+  },
+  {
+    number: "02",
+    days: "Day 2–3",
+    title: "APIs & Integration",
+    items: ["What is an API", "REST APIs (GET, POST, PUT)", "Connecting n8n to external systems", "Build your first API workflow"],
+  },
+  {
+    number: "03",
+    days: "Day 3–4",
+    title: "AI + LLM Integration",
+    items: ["Introduction to Large Language Models", "Using OpenAI / Azure OpenAI in n8n", "Prompt engineering basics", "Building AI-powered workflows"],
+  },
+  {
+    number: "04",
+    days: "Day 4",
+    title: "AI Agents in n8n",
+    items: ["What are AI Agents", "Agent workflows using tools", "Memory + reasoning basics", "Build: Customer support agent, Invoice processing agent, Personal assistant"],
+  },
+  {
+    number: "05",
+    days: "Day 5",
+    title: "Cloud Deployment",
+    items: ["Intro to Amazon Web Services", "Deploy n8n on Amazon EC2", "Storage basics with Amazon S3", "Environment variables + secrets"],
+  },
+  {
+    number: "06",
+    days: "Advanced",
+    title: "Backend + APIs",
+    items: ["Introduction to FastAPI", "Build your own AI API", "Connect FastAPI → n8n", "Creating reusable automation services"],
+  },
+];
+
+/* ─────────────────────────────────────────────────
+   SHARED NAV + FOOTER
+───────────────────────────────────────────────── */
+function Nav({ onNavigate, currentPage, scrolled }) {
+  return (
+    <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
+      <div className="nav-logo" onClick={() => onNavigate("home")}>
+        ACE <span>GROUP</span>
+      </div>
+      <ul className="nav-links">
+        <li><a onClick={() => onNavigate("home")} className={currentPage === "home" ? "active" : ""}>Home</a></li>
+        <li><a onClick={() => onNavigate("home", "services")} className="">Services</a></li>
+        <li><a onClick={() => onNavigate("events")} className={currentPage === "events" ? "active" : ""}>Events</a></li>
+        <li><a onClick={() => onNavigate("home", "about")} className="">About</a></li>
+      </ul>
+      <a onClick={() => onNavigate("home", "contact")} className="nav-cta" style={{ cursor: "pointer" }}>Get in Touch</a>
+    </nav>
+  );
+}
+
+function Footer({ onNavigate }) {
+  return (
+    <footer className="footer">
+      <div className="footer-top">
+        <div className="footer-logo" onClick={() => onNavigate("home")}>ACE <span>GROUP</span></div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", alignItems: "flex-end" }}>
+          <div className="footer-social">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter/X</a>
+          </div>
+          <div className="footer-links">
+            <a onClick={() => onNavigate("privacy")}>Privacy Policy</a>
+            <a onClick={() => onNavigate("terms")}>Terms of Service</a>
+            <a onClick={() => onNavigate("refund")}>Refund Policy</a>
+            <a onClick={() => onNavigate("delivery")}>Delivery Timeline</a>
+          </div>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Ace Group of Companies · Ace the Academia</span>
+        <span>South Africa · Reg. No. [Registration Number]</span>
+      </div>
+    </footer>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   EVENTS PAGE
+───────────────────────────────────────────────── */
+function EventsPage({ onNavigate, scrolled }) {
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage="events" scrolled={scrolled} />
+
+      {/* HERO */}
+      <section className="events-hero">
+        <div className="events-hero-bg" />
+        <div className="events-grid-bg" />
+        <div className="div-back" onClick={() => onNavigate("home")}>← Back to Home</div>
+        <div className="div-hero-eyebrow">Ace the Academia · Live Events</div>
+        <h1 className="div-hero-title">
+          <span style={{ display: "block" }}>Upcoming</span>
+          <span style={{ display: "block" }}><em>Events &</em></span>
+          <span style={{ display: "block" }}>Bootcamps</span>
+        </h1>
+        <p className="div-hero-sub">
+          Hands-on learning experiences, live workshops, and intensive bootcamps designed to take you from beginner to builder. Real skills. Real systems. Real results.
+        </p>
+      </section>
+
+      <div className="events-accent" />
+
+      {/* FEATURED EVENT */}
+      <section className="events-section">
+        <div className="section-tag">Featured Event · Aug 2026</div>
+        <h2 className="section-title" style={{ marginBottom: "2.5rem" }}>
+          Our Next <em>Bootcamp</em>
+        </h2>
+
+        <div className="event-featured">
+          <div className="event-featured-inner">
+            <div className="event-main">
+              <div className="event-badge">
+                <div className="event-badge-dot" />
+                Enrolling Now · Limited Spots
+              </div>
+              <h3 className="event-title">
+                AI n8n<br /><em>Automation</em><br />Bootcamp
+              </h3>
+              <div className="event-subtitle">Hosted by Ace the Academia</div>
+              <p className="event-tagline">
+                Learn how to build powerful AI-driven automations with n8n, APIs, AI Agents and Cloud Deployment. Hands-on. Practical. Transformative.
+              </p>
+              <div className="event-meta">
+                <div className="event-meta-item">
+                  <span className="event-meta-icon">📅</span>
+                  <span><strong>1 August – 6 September 2026</strong></span>
+                </div>
+                <div className="event-meta-item">
+                  <span className="event-meta-icon">🕐</span>
+                  <span><strong>6 Weeks</strong> · Live Online</span>
+                </div>
+                <div className="event-meta-item">
+                  <span className="event-meta-icon">🎥</span>
+                  <span>Via <strong>Zoom</strong> · Live Sessions</span>
+                </div>
+                <div className="event-meta-item">
+                  <span className="event-meta-icon">📍</span>
+                  <span>South Africa · Remote</span>
+                </div>
+              </div>
+              <div className="event-includes">
+                {["Workflow Automation", "APIs & Integrations", "AI & LLM Integration", "AI Agents in n8n", "Cloud Deployment", "FastAPI Backend"].map(t => (
+                  <div className="event-tag" key={t}>{t}</div>
+                ))}
+              </div>
+              <div className="event-actions">
+                <a
+                  href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whatsapp-btn"
+                >
+                  📱 Register via WhatsApp
+                </a>
+                <button className="btn-ghost" onClick={() => document.getElementById("bootcamp-phases")?.scrollIntoView({ behavior: "smooth" })}>
+                  View Curriculum
+                </button>
+              </div>
+            </div>
+
+            <div className="event-pricing">
+              <div className="pricing-label">Full Bootcamp Investment</div>
+              <div className="pricing-amount">
+                <span className="pricing-currency">R</span>720
+              </div>
+              <div className="pricing-period">One-time payment · Full access</div>
+              <ul className="pricing-features">
+                <li><span className="pricing-check">✓</span> Live interactive classes via Zoom</li>
+                <li><span className="pricing-check">✓</span> Hands-on projects every week</li>
+                <li><span className="pricing-check">✓</span> Real-world automation systems</li>
+                <li><span className="pricing-check">✓</span> Templates & workflows included</li>
+                <li><span className="pricing-check">✓</span> Certificate of Completion</li>
+                <li><span className="pricing-check">✓</span> Lifetime access to resources</li>
+                <li><span className="pricing-check">✓</span> Support & community access</li>
+              </ul>
+              <a
+                href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-purple"
+                style={{ width: "100%", textAlign: "center" }}
+              >
+                Book Your Spot
+              </a>
+              <div className="pricing-note">
+                073 929 8456 · WhatsApp to register<br />
+                Limited slots — book today to secure your place.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CURRICULUM */}
+      <section id="bootcamp-phases" className="phases-section">
+        <div style={{ padding: "0 0 4rem" }}>
+          <div className="section-tag">6-Week Curriculum</div>
+          <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+            What You'll <em>Learn</em>
+          </h2>
+        </div>
+        <div className="phases-grid">
+          {BOOTCAMP_PHASES.map((phase) => (
+            <div className="phase-card" key={phase.number}>
+              <div className="phase-number">{phase.number}</div>
+              <div className="phase-days">{phase.days}</div>
+              <div className="phase-title">{phase.title}</div>
+              <ul className="phase-list">
+                {phase.items.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* REGISTER CTA */}
+      <section className="register-section">
+        <div className="section-tag" style={{ justifyContent: "center" }}>Automate Today. Lead Tomorrow.</div>
+        <h2 className="cta-title">
+          Ready to Build<br /><em>Real Automations?</em>
+        </h2>
+        <p className="cta-sub">
+          Spaces are limited. Join the AI n8n Automation Bootcamp and gain the skills to automate workflows, deploy AI agents, and build production-ready systems — in just 6 weeks.
+        </p>
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "1.5rem" }}>
+          <a
+            href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whatsapp-btn"
+            style={{ fontSize: "0.95rem", padding: "1.1rem 2.4rem" }}
+          >
+            📱 WhatsApp: 073 929 8456
+          </a>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-ghost">Email Us Instead</a>
+        </div>
+        <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", textAlign: "center" }}>
+          Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment · 1 Aug – 6 Sep 2026
+        </p>
+      </section>
+
+      <div className="divider" />
+      <Footer onNavigate={onNavigate} />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   LEGAL PAGES
+───────────────────────────────────────────────── */
+function LegalPage({ type, onNavigate, scrolled }) {
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [type]);
+
+  const pages = {
+    privacy: {
+      title: "Privacy Policy",
+      updated: "Last updated: 9 June 2026",
+      content: (
+        <>
+          <h2>1. Introduction</h2>
+          <p>Ace Group of Companies and Ace the Academia ("we", "our", "us") are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or register for our events and programmes, in accordance with the <strong>Protection of Personal Information Act 4 of 2013 (POPIA)</strong> of South Africa.</p>
+
+          <h2>2. Information We Collect</h2>
+          <p>We may collect the following personal information:</p>
+          <ul>
+            <li>Full name and contact details (email address, phone number)</li>
+            <li>Payment information (processed securely via our payment providers)</li>
+            <li>Academic or professional background (where relevant to programme enrolment)</li>
+            <li>Usage data and website interaction information</li>
+            <li>Communications you send to us via email or WhatsApp</li>
+          </ul>
+
+          <h2>3. How We Use Your Information</h2>
+          <p>We use your personal information to:</p>
+          <ul>
+            <li>Process your registration and payment for bootcamps and programmes</li>
+            <li>Communicate event details, schedules, and updates</li>
+            <li>Send certificates of completion and course materials</li>
+            <li>Respond to enquiries and provide customer support</li>
+            <li>Improve our services and develop new offerings</li>
+            <li>Comply with legal and regulatory obligations</li>
+          </ul>
+
+          <h2>4. Sharing of Information</h2>
+          <p>We do not sell your personal information to third parties. We may share your information with:</p>
+          <ul>
+            <li>Payment processing providers to facilitate transactions</li>
+            <li>Video conferencing platforms (Zoom) to deliver live sessions</li>
+            <li>Service providers who assist in delivering our programmes</li>
+            <li>Law enforcement or regulatory bodies where required by law</li>
+          </ul>
+
+          <h2>5. Data Retention</h2>
+          <p>We retain your personal information for as long as necessary to fulfil the purposes outlined in this policy, or as required by law. Registration and payment records are retained for a minimum of 5 years for accounting and legal purposes.</p>
+
+          <h2>6. Your Rights under POPIA</h2>
+          <p>You have the right to access, correct, or request deletion of your personal information. You may also object to processing or withdraw consent at any time. To exercise these rights, contact us at <strong>4148924@myuwc.ac.za</strong>.</p>
+
+          <h2>7. Cookies</h2>
+          <p>Our website may use cookies to improve your browsing experience. You can disable cookies through your browser settings, though this may affect certain website functionality.</p>
+
+          <h2>8. Security</h2>
+          <p>We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction.</p>
+
+          <h2>9. Contact Us</h2>
+          <p>For any privacy-related queries, please contact us at: <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+        </>
+      ),
+    },
+    terms: {
+      title: "Terms of Service",
+      updated: "Last updated: 9 June 2026",
+      content: (
+        <>
+          <h2>1. Acceptance of Terms</h2>
+          <p>By accessing our website or registering for any programme offered by Ace Group of Companies and Ace the Academia ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
+
+          <h2>2. Services Offered</h2>
+          <p>Ace the Academia offers live online bootcamps, training programmes, and educational events. Our flagship offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live online programme delivered via Zoom.</p>
+
+          <h2>3. Registration and Enrolment</h2>
+          <ul>
+            <li>Registration is confirmed upon receipt of full payment of <strong>R720.00</strong></li>
+            <li>Spots are limited and allocated on a first-come, first-served basis</li>
+            <li>You will receive confirmation and joining details via WhatsApp or email within 48 hours of payment</li>
+            <li>You must be at least 16 years of age to enrol, or have parental/guardian consent</li>
+          </ul>
+
+          <h2>4. Payment Terms</h2>
+          <p>All prices are quoted in South African Rand (ZAR) and include VAT where applicable. Payment must be made in full before access is granted. We accept payment via the methods specified at checkout. Secure payment processing is handled by our authorised payment gateway provider.</p>
+
+          <h2>5. Intellectual Property</h2>
+          <p>All course materials, content, recordings, templates, and workflows provided through our programmes are the intellectual property of Ace the Academia. You are granted a personal, non-transferable licence to use materials for your own learning. You may not resell, redistribute, or sublicense any course content without written permission.</p>
+
+          <h2>6. Code of Conduct</h2>
+          <p>Participants are expected to engage respectfully in all live sessions and community spaces. We reserve the right to remove any participant who engages in disruptive, abusive, or inappropriate behaviour without refund.</p>
+
+          <h2>7. Technical Requirements</h2>
+          <p>Participants are responsible for ensuring they have a stable internet connection, a compatible device, and a Zoom account to attend live sessions. We are not liable for technical issues on the participant's side.</p>
+
+          <h2>8. Limitation of Liability</h2>
+          <p>To the fullest extent permitted by South African law, Ace Group and Ace the Academia shall not be liable for any indirect, incidental, or consequential damages arising from participation in our programmes or use of our website.</p>
+
+          <h2>9. Governing Law</h2>
+          <p>These Terms are governed by the laws of the Republic of South Africa. Any disputes shall be subject to the jurisdiction of the South African courts.</p>
+
+          <h2>10. Changes to Terms</h2>
+          <p>We reserve the right to update these Terms at any time. Continued use of our services following notification of changes constitutes acceptance of the revised Terms.</p>
+
+          <h2>11. Contact</h2>
+          <p>Questions about these Terms? Contact us at <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+        </>
+      ),
+    },
+    refund: {
+      title: "Refund Policy",
+      updated: "Last updated: 9 June 2026",
+      content: (
+        <>
+          <h2>1. Overview</h2>
+          <p>Ace the Academia is committed to delivering high-quality training and education. We understand that circumstances change, and we aim to be fair and transparent in our refund process. This policy applies to all bootcamp and programme registrations.</p>
+
+          <h2>2. Cooling-Off Period</h2>
+          <p>In accordance with the <strong>Consumer Protection Act 68 of 2008 (CPA)</strong> of South Africa, you have a 5 business day cooling-off period from the date of purchase during which you may cancel your registration and receive a full refund, provided the programme has not yet commenced.</p>
+
+          <h2>3. Cancellation Before Programme Start</h2>
+          <ul>
+            <li><strong>More than 14 days before start date:</strong> Full refund, less a 10% administration fee</li>
+            <li><strong>7–14 days before start date:</strong> 50% refund</li>
+            <li><strong>Less than 7 days before start date:</strong> No refund, but your registration may be transferred to the next available cohort</li>
+          </ul>
+
+          <h2>4. Cancellation After Programme Start</h2>
+          <ul>
+            <li><strong>Within the first week (Week 1):</strong> 25% refund of the programme fee</li>
+            <li><strong>After Week 1:</strong> No refund is available once more than one week of the programme has been completed</li>
+          </ul>
+
+          <h2>5. Programme Cancellation by Ace the Academia</h2>
+          <p>In the unlikely event that we need to cancel a scheduled programme, all registered participants will receive a <strong>full refund</strong> within 7 business days, or the option to transfer to the next available cohort.</p>
+
+          <h2>6. Programme Postponement</h2>
+          <p>If a programme is postponed, participants will be offered the choice to transfer to the rescheduled date or receive a full refund.</p>
+
+          <h2>7. Non-Attendance</h2>
+          <p>No refund will be issued for non-attendance where the programme proceeds as scheduled. If you are unable to attend live sessions, you retain access to recordings and resources for the lifetime of your enrolment.</p>
+
+          <h2>8. How to Request a Refund</h2>
+          <p>To request a refund, contact us via:</p>
+          <ul>
+            <li>Email: <strong>4148924@myuwc.ac.za</strong></li>
+            <li>WhatsApp: <strong>073 929 8456</strong></li>
+          </ul>
+          <p>Please include your full name, registration details, and reason for cancellation. Refunds will be processed to the original payment method within <strong>7–10 business days</strong> of approval.</p>
+
+          <h2>9. Exceptional Circumstances</h2>
+          <p>We consider requests for refunds outside these terms in cases of serious illness or bereavement, subject to supporting documentation. These are assessed on a case-by-case basis at our discretion.</p>
+        </>
+      ),
+    },
+    delivery: {
+      title: "Delivery Timeline",
+      updated: "Last updated: 9 June 2026",
+      content: (
+        <>
+          <h2>1. What We Deliver</h2>
+          <p>Ace the Academia delivers <strong>live online educational programmes and bootcamps</strong>. Our primary current offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live training programme conducted online via Zoom.</p>
+          <p>All deliverables are <strong>digital in nature</strong>. We do not ship physical goods. This policy outlines what you can expect and when, from registration through to programme completion.</p>
+
+          <h2>2. Registration Confirmation</h2>
+          <p>After successful payment, you will receive:</p>
+          <ul>
+            <li>A registration confirmation message via WhatsApp or email <strong>within 24–48 hours</strong></li>
+            <li>Your enrolment number and participant details</li>
+            <li>A welcome message with preparation instructions</li>
+          </ul>
+
+          <h2>3. Pre-Programme Access (7 Days Before Start)</h2>
+          <p>Approximately <strong>7 days before the programme start date</strong>, participants will receive:</p>
+          <ul>
+            <li>Zoom meeting links for all scheduled live sessions</li>
+            <li>Access to the participant resource folder (templates, pre-reading material)</li>
+            <li>Community or group chat access for peer interaction</li>
+            <li>Technical setup guide to ensure your environment is ready</li>
+          </ul>
+
+          <h2>4. During the Programme (6 Weeks)</h2>
+          <p>The <strong>AI n8n Automation Bootcamp</strong> runs from <strong>1 August to 6 September 2026</strong>. Each week includes:</p>
+          <ul>
+            <li>Live Zoom sessions on scheduled days and times</li>
+            <li>Session recordings made available within <strong>24 hours</strong> of each live session</li>
+            <li>Weekly hands-on project tasks and workflow templates</li>
+            <li>Support access via WhatsApp and community channels</li>
+          </ul>
+
+          <h2>5. Programme Completion</h2>
+          <p>Upon successful completion of the programme, participants will receive:</p>
+          <ul>
+            <li>A digital <strong>Certificate of Completion</strong> issued within 5 business days of the programme end date</li>
+            <li>Lifetime access to all programme recordings and resources</li>
+            <li>Access to the alumni community network</li>
+          </ul>
+
+          <h2>6. Timeline Summary</h2>
+          <ul>
+            <li><strong>Payment received:</strong> Confirmation within 24–48 hours</li>
+            <li><strong>7 days before start:</strong> All links, resources, and access delivered</li>
+            <li><strong>1 Aug – 6 Sep 2026:</strong> Live programme delivery (recordings within 24 hrs)</li>
+            <li><strong>Within 5 business days of end:</strong> Certificate of Completion issued</li>
+          </ul>
+
+          <h2>7. Delays and Disruptions</h2>
+          <p>In the event of unforeseen technical disruptions to a live session, the session will be rescheduled and participants notified via WhatsApp as soon as possible. Recordings will be provided in the interim.</p>
+
+          <h2>8. Contact</h2>
+          <p>For delivery queries, contact us at <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+        </>
+      ),
+    },
+  };
+
+  const page = pages[type];
+  if (!page) return null;
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage={type} scrolled={scrolled} />
+
+      <section className="legal-hero">
+        <div className="legal-hero-bg" />
+        <div className="div-back" onClick={() => onNavigate("home")}>← Back to Home</div>
+        <div className="div-hero-eyebrow">Ace Group · Legal</div>
+        <h1 className="div-hero-title" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+          {page.title}
+        </h1>
+      </section>
+
+      <div className="divider" />
+
+      <nav className="legal-nav">
+        {[
+          { key: "privacy", label: "Privacy Policy" },
+          { key: "terms", label: "Terms of Service" },
+          { key: "refund", label: "Refund Policy" },
+          { key: "delivery", label: "Delivery Timeline" },
+        ].map(({ key, label }) => (
+          <a key={key} onClick={() => onNavigate(key)} className={type === key ? "active" : ""}>{label}</a>
+        ))}
+      </nav>
+
+      <div className="legal-content">
+        <div className="legal-meta">{page.updated} · Ace Group of Companies & Ace the Academia · South Africa</div>
+        {page.content}
+      </div>
+
+      <div className="divider" />
+      <Footer onNavigate={onNavigate} />
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────────
    DIVISION PAGE
 ───────────────────────────────────────────────── */
 function DivisionPage({ division, onBack, onNavigate, scrolled }) {
   const related = SERVICES.filter((s) => s.id !== division.id).slice(0, 4);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [division.id]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [division.id]);
 
   return (
     <div className="page-enter">
-      {/* NAV */}
-      <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
-        <div className="nav-logo" onClick={onBack}>
-          ACE <span>GROUP</span>
-        </div>
-        <ul className="nav-links">
-          <li><a onClick={onBack}>Home</a></li>
-          <li><a onClick={onBack}>Services</a></li>
-          <li><a onClick={onBack}>About</a></li>
-        </ul>
-        <a href="#contact-div" className="nav-cta">Get in Touch</a>
-      </nav>
+      <Nav onNavigate={onNavigate} currentPage="division" scrolled={scrolled} />
 
-      {/* DIVISION HERO */}
       <section className="div-hero">
-        <div
-          className="div-hero-bg"
-          style={{
-            background: `radial-gradient(ellipse 70% 80% at 60% 40%, ${division.accentColor} 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 15% 80%, ${division.accentColorStrong} 0%, transparent 50%), var(--dark)`,
-          }}
-        />
+        <div className="div-hero-bg" style={{ background: `radial-gradient(ellipse 70% 80% at 60% 40%, ${division.accentColor} 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 15% 80%, ${division.accentColorStrong} 0%, transparent 50%), var(--dark)` }} />
         <div className="div-hero-grid" />
-
-        <div className="div-back" onClick={onBack}>
-          ← Back to All Divisions
-        </div>
-
-        <div className="div-hero-eyebrow">
-          Division {division.number} · Ace Group
-        </div>
-
+        <div className="div-back" onClick={onBack}>← Back to All Divisions</div>
+        <div className="div-hero-eyebrow">Division {division.number} · Ace Group</div>
         <h1 className="div-hero-title">
           {division.tagline.split("\n").map((line, i) => (
-            <span key={i} style={{ display: "block" }}>
-              {i === 1 ? <em>{line}</em> : line}
-            </span>
+            <span key={i} style={{ display: "block" }}>{i === 1 ? <em>{line}</em> : line}</span>
           ))}
         </h1>
-
         <p className="div-hero-sub">{division.sub}</p>
       </section>
 
       <div className="div-accent" />
 
-      {/* OVERVIEW */}
       <div className="div-overview">
         <div className="div-overview-left">
           <div className="div-big-number">{division.number}</div>
@@ -720,26 +1286,17 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
           <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
             <span style={{ color: "var(--gold)" }}>Ace Group</span> · South Africa · Est. 2024
           </div>
-          <div style={{ marginTop: "2rem", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <button
-              className="btn-primary"
-              style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }}
-              onClick={() => {
-                document.getElementById("contact-div")?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
+          <div style={{ marginTop: "2rem" }}>
+            <button className="btn-primary" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => document.getElementById("contact-div")?.scrollIntoView({ behavior: "smooth" })}>
               Engage With Us
             </button>
           </div>
         </div>
         <div className="div-overview-right">
-          {division.overview.map((para, i) => (
-            <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
-          ))}
+          {division.overview.map((para, i) => (<p key={i} dangerouslySetInnerHTML={{ __html: para }} />))}
         </div>
       </div>
 
-      {/* PILLARS */}
       <div className="div-pillars">
         {division.pillars.map((p, i) => (
           <div className="div-pillar" key={i}>
@@ -750,7 +1307,6 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         ))}
       </div>
 
-      {/* STATS */}
       <div className="div-stats">
         {division.stats.map((s, i) => (
           <div className="div-stat" key={i}>
@@ -760,7 +1316,6 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         ))}
       </div>
 
-      {/* OFFERINGS */}
       <div className="div-offerings">
         <div className="section-tag">What We Offer</div>
         <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "3rem" }}>
@@ -779,7 +1334,6 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         </div>
       </div>
 
-      {/* QUOTE */}
       <div className="div-quote-section">
         <div className="div-quote">{division.quote}</div>
         <div className="div-quote-attr">{division.quoteAttr}</div>
@@ -787,7 +1341,6 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
 
       <div className="divider" />
 
-      {/* RELATED DIVISIONS */}
       <div className="div-related">
         <div className="section-tag">Explore More</div>
         <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "2.5rem" }}>
@@ -795,7 +1348,7 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         </h2>
         <div className="div-related-grid">
           {related.map((s) => (
-            <div className="div-related-card" key={s.id} onClick={() => onNavigate(s)}>
+            <div className="div-related-card" key={s.id} onClick={() => onNavigate("division", null, s)}>
               <div>
                 <div className="div-related-icon">{s.icon}</div>
                 <div className="div-related-name">{s.name}</div>
@@ -807,24 +1360,15 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         </div>
       </div>
 
-      {/* CTA */}
       <section id="contact-div" className="cta-section">
         <div className="section-tag" style={{ justifyContent: "center" }}>Let's Connect</div>
-        <h2 className="cta-title">
-          Interested in<br /><em>{division.name}?</em>
-        </h2>
-        <p className="cta-sub">
-          Reach out to the Ace Group team and let's explore how our {division.name} division can serve your needs.
-        </p>
+        <h2 className="cta-title">Interested in<br /><em>{division.name}?</em></h2>
+        <p className="cta-sub">Reach out to the Ace Group team and let's explore how our {division.name} division can serve your needs.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
           <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
           <button className="btn-ghost" onClick={onBack}>All Divisions</button>
         </div>
-
-        <form
-          className="contact-form"
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
           <input type="text" placeholder="Your Name" required />
           <input type="email" placeholder="Your Email" required />
           <textarea placeholder={`Tell us about your ${division.name} needs...`} required />
@@ -832,22 +1376,7 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         </form>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-top">
-          <div className="footer-logo" onClick={onBack}>ACE <span>GROUP</span></div>
-          <div className="footer-social">
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-            <a href="#">Facebook</a>
-            <a href="#">Twitter/X</a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Ace Group of Companies</span>
-          <span>South Africa</span>
-        </div>
-      </footer>
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }
@@ -858,18 +1387,8 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
 function HomePage({ onNavigate, scrolled }) {
   return (
     <>
-      {/* NAV */}
-      <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
-        <a href="#home" className="nav-logo">ACE <span>GROUP</span></a>
-        <ul className="nav-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#contact" className="nav-cta">Get in Touch</a>
-      </nav>
+      <Nav onNavigate={onNavigate} currentPage="home" scrolled={scrolled} />
 
-      {/* HERO */}
       <section id="home" className="hero">
         <div className="hero-bg" />
         <div className="hero-grid" />
@@ -879,10 +1398,7 @@ function HomePage({ onNavigate, scrolled }) {
           <span className="block"><em>Tomorrow's</em></span>
           <span className="block">Africa</span>
         </h1>
-        <p className="hero-sub">
-          A diversified group of companies driving innovation across Education,
-          Technology, AI and Transportation — rooted in South Africa, built for the world.
-        </p>
+        <p className="hero-sub">A diversified group of companies driving innovation across Education, Technology, AI and Transportation — rooted in South Africa, built for the world.</p>
         <div className="hero-actions">
           <a href="#services" className="btn-primary">Our Divisions</a>
           <a href="#about" className="btn-ghost">Learn More</a>
@@ -892,7 +1408,6 @@ function HomePage({ onNavigate, scrolled }) {
 
       <div className="divider" />
 
-      {/* STATS */}
       <div className="stats-bar">
         {[
           { number: "5", label: "Business Divisions" },
@@ -907,15 +1422,38 @@ function HomePage({ onNavigate, scrolled }) {
         ))}
       </div>
 
-      {/* SERVICES */}
+      {/* UPCOMING EVENT BANNER */}
+      <div
+        onClick={() => onNavigate("events")}
+        style={{
+          background: "linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(201,151,58,0.06) 100%)",
+          border: "0.5px solid rgba(124,58,237,0.2)",
+          borderLeft: "3px solid var(--purple)",
+          padding: "1.5rem 4rem",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          cursor: "pointer", transition: "background 0.3s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = "linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(201,151,58,0.08) 100%)"}
+        onMouseLeave={e => e.currentTarget.style.background = "linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(201,151,58,0.06) 100%)"}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <div style={{ background: "var(--purple-dim)", border: "0.5px solid rgba(124,58,237,0.3)", padding: "0.3rem 0.8rem", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--purple-light)" }}>
+            🔴 Enrolling Now
+          </div>
+          <div>
+            <span style={{ fontWeight: 500, color: "var(--text-primary)", fontSize: "0.9rem" }}>AI n8n Automation Bootcamp</span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>1 Aug – 6 Sep 2026 · R720 · Limited Spots</span>
+          </div>
+        </div>
+        <span style={{ color: "var(--purple-light)", fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>View Event →</span>
+      </div>
+
       <section id="services" className="section">
         <div className="section-tag">What We Do</div>
-        <h2 className="section-title">
-          Five Divisions.<br /><em>One Vision.</em>
-        </h2>
+        <h2 className="section-title">Five Divisions.<br /><em>One Vision.</em></h2>
         <div className="services-grid">
           {SERVICES.map((s) => (
-            <div className="service-card" key={s.number} onClick={() => onNavigate(s)}>
+            <div className="service-card" key={s.number} onClick={() => onNavigate("division", null, s)}>
               <div className="service-number">{s.number}</div>
               <div className="service-icon">{s.icon}</div>
               <h3 className="service-name">{s.name}</h3>
@@ -926,7 +1464,6 @@ function HomePage({ onNavigate, scrolled }) {
         </div>
       </section>
 
-      {/* ABOUT */}
       <section id="about" className="about-section">
         <div style={{ position: "relative" }}>
           <div className="about-emblem">
@@ -942,43 +1479,24 @@ function HomePage({ onNavigate, scrolled }) {
           <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3vw, 2.8rem)", marginBottom: "2rem" }}>
             A Group Built on<br /><em>Purpose & Precision</em>
           </h2>
-          <p>
-            <strong>Ace Group of Companies</strong> is a proudly South African multi-sector conglomerate
-            on a mission to accelerate progress across the continent. We believe that
-            education, technology, and mobility are the three pillars of a thriving Africa.
-          </p>
-          <p>
-            From classrooms to codebases, from AI models to eHailing platforms, every
-            division of Ace Group is designed to solve real problems for real people —
-            with <strong>excellence, integrity, and ambition</strong> at our core.
-          </p>
-          <p>
-            Headquartered in South Africa, we are expanding our footprint across the
-            continent, bringing world-class solutions to markets that need them most.
-          </p>
+          <p><strong>Ace Group of Companies</strong> is a proudly South African multi-sector conglomerate on a mission to accelerate progress across the continent. We believe that education, technology, and mobility are the three pillars of a thriving Africa.</p>
+          <p>From classrooms to codebases, from AI models to eHailing platforms, every division of Ace Group is designed to solve real problems for real people — with <strong>excellence, integrity, and ambition</strong> at our core.</p>
+          <p>Headquartered in South Africa, we are expanding our footprint across the continent, bringing world-class solutions to markets that need them most.</p>
           <div className="sa-flag">
             <div className="sa-stripe" style={{ width: 32, background: "#007A4D" }} />
             <div className="sa-stripe" style={{ width: 32, background: "#FFB612" }} />
             <div className="sa-stripe" style={{ width: 32, background: "#DE3831" }} />
             <div className="sa-stripe" style={{ width: 32, background: "#002395" }} />
             <div className="sa-stripe" style={{ width: 32, background: "#FFFFFF" }} />
-            <span style={{ fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--text-muted)", marginLeft: "0.5rem" }}>
-              Proudly South African
-            </span>
+            <span style={{ fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--text-muted)", marginLeft: "0.5rem" }}>Proudly South African</span>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <section id="contact" className="cta-section">
         <div className="section-tag" style={{ justifyContent: "center" }}>Let's Connect</div>
-        <h2 className="cta-title">
-          Ready to Build<br /><em>Something Great?</em>
-        </h2>
-        <p className="cta-sub">
-          Whether you're a partner, investor, or client — we'd love to hear from you.
-          Let's create impact together across Africa and beyond.
-        </p>
+        <h2 className="cta-title">Ready to Build<br /><em>Something Great?</em></h2>
+        <p className="cta-sub">Whether you're a partner, investor, or client — we'd love to hear from you. Let's create impact together across Africa and beyond.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
           <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
           <a href="#services" className="btn-ghost">View Services</a>
@@ -991,22 +1509,7 @@ function HomePage({ onNavigate, scrolled }) {
         </form>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-top">
-          <div className="footer-logo">ACE <span>GROUP</span></div>
-          <div className="footer-social">
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-            <a href="#">Facebook</a>
-            <a href="#">Twitter/X</a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Ace Group of Companies</span>
-          <span>South Africa</span>
-        </div>
-      </footer>
+      <Footer onNavigate={onNavigate} />
     </>
   );
 }
@@ -1016,7 +1519,7 @@ function HomePage({ onNavigate, scrolled }) {
 ───────────────────────────────────────────────── */
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
-  const [currentDivision, setCurrentDivision] = useState(null);
+  const [page, setPage] = useState({ type: "home", division: null });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -1024,30 +1527,37 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navigateToDivision = (division) => {
-    setCurrentDivision(division);
-    window.scrollTo({ top: 0 });
-  };
-
-  const navigateHome = () => {
-    setCurrentDivision(null);
-    setTimeout(() => {
-      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+  // navigate(pageType, sectionId?, division?)
+  const navigate = (type, section = null, division = null) => {
+    if (type === "home" && section) {
+      setPage({ type: "home", division: null });
+      setTimeout(() => {
+        document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else if (type === "division" && division) {
+      setPage({ type: "division", division });
+      window.scrollTo({ top: 0 });
+    } else {
+      setPage({ type, division: null });
+      window.scrollTo({ top: 0 });
+    }
   };
 
   return (
     <>
       <style>{styles}</style>
-      {currentDivision ? (
+      {page.type === "home" && <HomePage onNavigate={navigate} scrolled={scrolled} />}
+      {page.type === "division" && page.division && (
         <DivisionPage
-          division={currentDivision}
-          onBack={navigateHome}
-          onNavigate={navigateToDivision}
+          division={page.division}
+          onBack={() => navigate("home", "services")}
+          onNavigate={navigate}
           scrolled={scrolled}
         />
-      ) : (
-        <HomePage onNavigate={navigateToDivision} scrolled={scrolled} />
+      )}
+      {page.type === "events" && <EventsPage onNavigate={navigate} scrolled={scrolled} />}
+      {["privacy", "terms", "refund", "delivery"].includes(page.type) && (
+        <LegalPage type={page.type} onNavigate={navigate} scrolled={scrolled} />
       )}
     </>
   );
