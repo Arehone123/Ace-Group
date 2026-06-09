@@ -883,7 +883,7 @@ function EventsPage({ onNavigate, scrolled }) {
                 </div>
                 <div className="event-meta-item">
                   <span className="event-meta-icon">🎥</span>
-                  <span>Via <strong>Zoom</strong> · Live Sessions</span>
+                  <span>Via <strong>Online Video Conferencing</strong> · Live Sessions</span>
                 </div>
                 <div className="event-meta-item">
                   <span className="event-meta-icon">📍</span>
@@ -917,7 +917,7 @@ function EventsPage({ onNavigate, scrolled }) {
               </div>
               <div className="pricing-period">One-time payment · Full access</div>
               <ul className="pricing-features">
-                <li><span className="pricing-check">✓</span> Live interactive classes via Zoom</li>
+                <li><span className="pricing-check">✓</span> Live interactive online classes </li>
                 <li><span className="pricing-check">✓</span> Hands-on projects every week</li>
                 <li><span className="pricing-check">✓</span> Real-world automation systems</li>
                 <li><span className="pricing-check">✓</span> Templates & workflows included</li>
@@ -1039,7 +1039,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>We do not sell your personal information to third parties. We may share your information with:</p>
           <ul>
             <li>Payment processing providers to facilitate transactions</li>
-            <li>Video conferencing platforms (Zoom) to deliver live sessions</li>
+            <li>Video conferencing platforms to deliver live sessions</li>
             <li>Service providers who assist in delivering our programmes</li>
             <li>Law enforcement or regulatory bodies where required by law</li>
           </ul>
@@ -1070,7 +1070,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>By accessing our website or registering for any programme offered by Ace Group of Companies and Ace the Academia ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
 
           <h2>2. Services Offered</h2>
-          <p>Ace the Academia offers live online bootcamps, training programmes, and educational events. Our flagship offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live online programme delivered via Zoom.</p>
+          <p>Ace the Academia offers live online bootcamps, training programmes, and educational events. Our flagship offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live online programme delivered via Online Video conferencing.</p>
 
           <h2>3. Registration and Enrolment</h2>
           <ul>
@@ -1090,7 +1090,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <p>Participants are expected to engage respectfully in all live sessions and community spaces. We reserve the right to remove any participant who engages in disruptive, abusive, or inappropriate behaviour without refund.</p>
 
           <h2>7. Technical Requirements</h2>
-          <p>Participants are responsible for ensuring they have a stable internet connection, a compatible device, and a Zoom account to attend live sessions. We are not liable for technical issues on the participant's side.</p>
+          <p>Participants are responsible for ensuring they have a stable internet connection. We are not liable for technical issues on the participant's side.</p>
 
           <h2>8. Limitation of Liability</h2>
           <p>To the fullest extent permitted by South African law, Ace Group and Ace the Academia shall not be liable for any indirect, incidental, or consequential damages arising from participation in our programmes or use of our website.</p>
@@ -1158,7 +1158,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
       content: (
         <>
           <h2>1. What We Deliver</h2>
-          <p>Ace the Academia delivers <strong>live online educational programmes and bootcamps</strong>. Our primary current offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live training programme conducted online via Zoom.</p>
+          <p>Ace the Academia delivers <strong>live online educational programmes and bootcamps</strong>. Our primary current offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live training programme conducted online.</p>
           <p>All deliverables are <strong>digital in nature</strong>. We do not ship physical goods. This policy outlines what you can expect and when, from registration through to programme completion.</p>
 
           <h2>2. Registration Confirmation</h2>
@@ -1172,7 +1172,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <h2>3. Pre-Programme Access (7 Days Before Start)</h2>
           <p>Approximately <strong>7 days before the programme start date</strong>, participants will receive:</p>
           <ul>
-            <li>Zoom meeting links for all scheduled live sessions</li>
+            <li>Class meeting links for all scheduled live sessions</li>
             <li>Access to the participant resource folder (templates, pre-reading material)</li>
             <li>Community or group chat access for peer interaction</li>
             <li>Technical setup guide to ensure your environment is ready</li>
@@ -1181,7 +1181,7 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <h2>4. During the Programme (6 Weeks)</h2>
           <p>The <strong>AI n8n Automation Bootcamp</strong> runs from <strong>1 August to 6 September 2026</strong>. Each week includes:</p>
           <ul>
-            <li>Live Zoom sessions on scheduled days and times</li>
+            <li>Live Online sessions on scheduled days and times</li>
             <li>Session recordings made available within <strong>24 hours</strong> of each live session</li>
             <li>Weekly hands-on project tasks and workflow templates</li>
             <li>Support access via WhatsApp and community channels</li>
