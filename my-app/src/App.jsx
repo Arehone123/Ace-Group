@@ -817,7 +817,7 @@ function Footer({ onNavigate }) {
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Ace Group of Companies · Ace the Academia</span>
-        <span>South Africa · Reg. No. [Registration Number]</span>
+        <span>South Africa · Reg. No. 2026/392557/07</span>
       </div>
     </footer>
   );
