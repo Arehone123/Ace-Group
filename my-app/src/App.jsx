@@ -20,6 +20,12 @@ const styles = `
     --purple: #7C3AED;
     --purple-light: #A78BFA;
     --purple-dim: rgba(124,58,237,0.15);
+    --green: #1D9E75;
+    --green-light: #34D399;
+    --green-dim: rgba(29,158,117,0.15);
+    --blue: #378ADE;
+    --blue-light: #60A5FA;
+    --blue-dim: rgba(55,138,221,0.15);
   }
 
   html { scroll-behavior: smooth; }
@@ -385,7 +391,6 @@ const styles = `
   }
   .events-accent { height: 3px; width: 100%; background: linear-gradient(90deg, var(--purple), rgba(124,58,237,0.1) 60%, transparent); }
 
-  /* Event card */
   .events-section { padding: 6rem 4rem; }
   .event-featured {
     border: 0.5px solid var(--border-dim); background: var(--dark-2);
@@ -432,8 +437,15 @@ const styles = `
     text-decoration: none; display: inline-block;
   }
   .btn-purple:hover { background: #6D28D9; transform: translateY(-1px); }
+  .btn-green {
+    font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: white;
+    background: var(--green); border: none; padding: 1rem 2.4rem;
+    cursor: pointer; transition: background 0.3s, transform 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-green:hover { background: #168a63; transform: translateY(-1px); }
 
-  /* Pricing panel */
   .event-pricing {
     background: var(--dark-3); border-left: 0.5px solid var(--border-dim);
     padding: 3rem 2.5rem; display: flex; flex-direction: column;
@@ -451,7 +463,6 @@ const styles = `
   .pricing-check { color: var(--gold); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.15rem; }
   .pricing-note { font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 1rem; line-height: 1.6; }
 
-  /* Phases */
   .phases-section { padding: 6rem 4rem; background: var(--dark-2); border-top: 0.5px solid var(--border-dim); border-bottom: 0.5px solid var(--border-dim); }
   .phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
   .phase-card { background: var(--dark-2); padding: 2.5rem 2rem; position: relative; transition: background 0.3s; }
@@ -463,7 +474,6 @@ const styles = `
   .phase-list li { font-size: 0.8rem; color: var(--text-muted); padding-left: 1rem; position: relative; }
   .phase-list li::before { content: '·'; position: absolute; left: 0; color: var(--purple-light); }
 
-  /* Register section */
   .register-section { padding: 7rem 4rem; text-align: center; position: relative; overflow: hidden; }
   .register-section::before {
     content: ''; position: absolute; inset: 0;
@@ -506,6 +516,238 @@ const styles = `
   .legal-nav a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.3s; text-decoration: none; }
   .legal-nav a:hover, .legal-nav a.active { color: var(--gold-light); }
 
+  /* ═══════════════════════════════
+     PRODUCT PAGES — TUTORING
+  ═══════════════════════════════ */
+  .prod-hero {
+    min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 5rem; position: relative; overflow: hidden;
+  }
+  .prod-hero-bg {
+    position: absolute; inset: 0;
+  }
+  .prod-hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(29,158,117,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,158,117,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 40% 50%, black 30%, transparent 80%);
+  }
+  .prod-accent-green { height: 3px; width: 100%; background: linear-gradient(90deg, var(--green), rgba(29,158,117,0.1) 60%, transparent); }
+  .prod-accent-blue { height: 3px; width: 100%; background: linear-gradient(90deg, var(--blue), rgba(55,138,221,0.1) 60%, transparent); }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 3rem; position: relative; flex-wrap: wrap;
+  }
+  .breadcrumb span { color: var(--gold); }
+  .breadcrumb a { color: var(--text-muted); cursor: pointer; transition: color 0.3s; }
+  .breadcrumb a:hover { color: var(--gold-light); }
+
+  /* Grade pricing cards */
+  .grades-section { padding: 6rem 4rem; }
+  .grades-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); margin-bottom: 4rem; }
+  .grade-card {
+    background: var(--dark-2); padding: 2.5rem 1.5rem;
+    position: relative; overflow: hidden; transition: background 0.35s; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .grade-card:hover { background: var(--dark-3); }
+  .grade-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--green), transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
+  .grade-card:hover::after { transform: scaleX(1); }
+  .grade-label {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 0.8rem;
+  }
+  .grade-number {
+    font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300;
+    color: var(--text-primary); line-height: 1; margin-bottom: 1.2rem;
+  }
+  .grade-price {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300;
+    color: var(--gold-light); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .grade-period { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1.8rem; }
+  .grade-btn {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dark); background: var(--green); border: none;
+    padding: 0.6rem 1.2rem; cursor: pointer; transition: background 0.3s; width: 100%;
+  }
+  .grade-btn:hover { background: var(--green-light); }
+  .grade-btn-ghost {
+    font-size: 0.72rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); background: transparent; border: 0.5px solid rgba(255,255,255,0.12);
+    padding: 0.6rem 1.2rem; cursor: pointer; transition: color 0.3s, border-color 0.3s; width: 100%; margin-top: 0.5rem;
+  }
+  .grade-btn-ghost:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.35); }
+
+  /* What's included grid */
+  .includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
+  .include-item { background: var(--dark-2); padding: 2rem 1.8rem; transition: background 0.3s; }
+  .include-item:hover { background: var(--dark-3); }
+  .include-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .include-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .include-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* Subjects tag cloud */
+  .subjects-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .subject-tag {
+    font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.4rem 1rem;
+    border: 0.5px solid var(--border-dim); color: var(--text-muted);
+    transition: border-color 0.3s, color 0.3s; cursor: default;
+  }
+  .subject-tag:hover { border-color: var(--green); color: var(--green-light); }
+
+  /* How it works steps */
+  .steps-section { padding: 6rem 4rem; background: var(--dark-2); border-top: 0.5px solid var(--border-dim); border-bottom: 0.5px solid var(--border-dim); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 0.5px solid var(--border-dim); }
+  .step-item {
+    padding: 2.5rem 2rem; border-right: 0.5px solid var(--border-dim);
+    position: relative;
+  }
+  .step-item:last-child { border-right: none; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300;
+    color: rgba(29,158,117,0.12); line-height: 1; margin-bottom: 1rem;
+  }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.6rem; }
+  .step-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* Quote form */
+  .quote-form-section { padding: 6rem 4rem; }
+  .quote-form-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; max-width: 1100px;
+  }
+  .quote-form { display: grid; gap: 1rem; }
+  .quote-form input, .quote-form textarea, .quote-form select {
+    background: var(--dark-3); border: 1px solid var(--border-dim);
+    padding: 1rem; color: white; font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.3s; width: 100%;
+  }
+  .quote-form input:focus, .quote-form textarea:focus, .quote-form select:focus { border-color: var(--green); }
+  .quote-form textarea { min-height: 120px; resize: vertical; }
+  .quote-form select { appearance: none; cursor: pointer; }
+  .quote-form select option { background: var(--dark-3); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ═══════════════════════════════
+     SOFTWARE DEV PRODUCTS
+  ═══════════════════════════════ */
+  .softprod-hero-bg {
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 30%, rgba(55,138,221,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 15% 80%, rgba(55,138,221,0.05) 0%, transparent 50%),
+      var(--dark);
+  }
+  .softprod-hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(55,138,221,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(55,138,221,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 80%);
+  }
+
+  /* Software service cards */
+  .soft-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
+  .soft-service-card {
+    background: var(--dark-2); padding: 3rem 2.5rem; position: relative; overflow: hidden;
+    transition: background 0.35s; cursor: pointer;
+  }
+  .soft-service-card:hover { background: var(--dark-3); }
+  .soft-service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--blue), transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
+  .soft-service-card:hover::before { transform: scaleX(1); }
+  .soft-card-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .soft-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.6rem; }
+  .soft-card-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+  .soft-card-pricing {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--blue-light); border: 0.5px solid rgba(55,138,221,0.25);
+    padding: 0.35rem 0.8rem; margin-bottom: 1.5rem;
+  }
+  .soft-card-btn {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: white; background: var(--blue); border: none;
+    padding: 0.65rem 1.4rem; cursor: pointer; transition: background 0.3s; display: inline-block;
+  }
+  .soft-card-btn:hover { background: #2171c4; }
+
+  /* Tech stack */
+  .tech-stack-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-dim); border: 0.5px solid var(--border-dim); }
+  .tech-item { background: var(--dark-2); padding: 2rem 1.5rem; text-align: center; transition: background 0.3s; }
+  .tech-item:hover { background: var(--dark-3); }
+  .tech-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+  .tech-name { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
+  .tech-category { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* Process timeline */
+  .process-section { padding: 6rem 4rem; }
+  .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .process-step {
+    padding: 2rem 1.5rem; text-align: center; position: relative;
+  }
+  .process-step::after {
+    content: '→'; position: absolute; right: -0.5rem; top: 2.2rem;
+    color: rgba(55,138,221,0.3); font-size: 1.2rem; z-index: 1;
+  }
+  .process-step:last-child::after { display: none; }
+  .process-step-num {
+    width: 44px; height: 44px; border: 0.5px solid rgba(55,138,221,0.3);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--blue-light);
+    margin: 0 auto 1rem;
+  }
+  .process-step-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .process-step-text { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ─── MODAL / QUOTE DRAWER ─── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    animation: fadeIn 0.25s ease;
+  }
+  .modal-box {
+    background: var(--dark-2); border: 0.5px solid var(--border);
+    max-width: 560px; width: 90%; max-height: 90vh; overflow-y: auto;
+    padding: 3rem; position: relative; animation: fadeUp 0.3s ease;
+  }
+  .modal-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-size: 1.4rem; line-height: 1; transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--text-primary); }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .modal-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .modal-form { display: grid; gap: 0.8rem; }
+  .modal-form input, .modal-form select, .modal-form textarea {
+    background: var(--dark-3); border: 1px solid var(--border-dim);
+    padding: 0.85rem 1rem; color: white; font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem; outline: none; transition: border-color 0.3s; width: 100%;
+  }
+  .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus { border-color: var(--gold); }
+  .modal-form select { appearance: none; cursor: pointer; }
+  .modal-form textarea { min-height: 100px; resize: vertical; }
+  .modal-form select option { background: var(--dark-3); }
+  .success-banner {
+    background: rgba(29,158,117,0.12); border: 0.5px solid rgba(29,158,117,0.3);
+    padding: 1rem 1.5rem; font-size: 0.875rem; color: var(--green-light);
+    text-align: center; margin-top: 1rem;
+  }
+
   /* ── MOBILE ── */
   @media (max-width: 768px) {
     .nav { padding: 1rem 1.5rem; }
@@ -542,6 +784,21 @@ const styles = `
     .legal-hero { padding: 0 1.5rem 3rem; min-height: 30vh; }
     .legal-content { padding: 3rem 1.5rem; }
     .legal-nav { padding: 1.5rem; gap: 1rem; }
+    .prod-hero { padding: 0 1.5rem 4rem; min-height: 55vh; }
+    .grades-section { padding: 4rem 1.5rem; }
+    .grades-grid { grid-template-columns: 1fr; }
+    .includes-grid { grid-template-columns: 1fr; }
+    .steps-section { padding: 4rem 1.5rem; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .step-item { border-right: none; border-bottom: 0.5px solid var(--border-dim); }
+    .quote-form-section { padding: 4rem 1.5rem; }
+    .quote-form-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .soft-services-grid { grid-template-columns: 1fr; }
+    .tech-stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: 1fr; }
+    .process-step::after { display: none; }
+    .modal-box { padding: 2rem 1.5rem; }
   }
 `;
 
@@ -736,6 +993,83 @@ const SERVICES = [
   },
 ];
 
+const TUTORING_GRADES = [
+  { grade: 8, price: 500 },
+  { grade: 9, price: 650 },
+  { grade: 10, price: 800 },
+  { grade: 11, price: 950 },
+  { grade: 12, price: 1100 },
+];
+
+const TUTORING_SUBJECTS = [
+  "Mathematics", "Physical Sciences", "Life Sciences", "English Home Language",
+  "Afrikaans First Additional", "Geography", "History", "Accounting",
+  "Business Studies", "Economics", "Computer Applications Technology",
+  "Information Technology", "Mathematical Literacy", "Life Orientation",
+];
+
+const SOFTWARE_SERVICES = [
+  {
+    id: "mobile",
+    icon: "📱",
+    title: "Mobile App Development",
+    desc: "Native iOS & Android apps or cross-platform solutions using React Native and Flutter. Built for performance, scalability, and beautiful user experience.",
+    pricing: "Request a Quote",
+    features: ["iOS & Android", "React Native / Flutter", "UI/UX Design", "App Store Submission", "Ongoing Support"],
+  },
+  {
+    id: "web",
+    icon: "🌐",
+    title: "Web Application Development",
+    desc: "Full-stack web applications from landing pages to enterprise platforms. Built with modern frameworks and optimised for performance and SEO.",
+    pricing: "Request a Quote",
+    features: ["React / Next.js / Vue", "Node.js / FastAPI", "PostgreSQL / MongoDB", "Cloud Deployment", "Responsive Design"],
+  },
+  {
+    id: "api",
+    icon: "🔌",
+    title: "API & Systems Integration",
+    desc: "Connecting your systems through robust, secure APIs. We integrate third-party services, build internal APIs, and modernise legacy system connectivity.",
+    pricing: "Request a Quote",
+    features: ["REST & GraphQL APIs", "Third-party Integrations", "Webhook Automation", "API Documentation", "Rate Limiting & Auth"],
+  },
+  {
+    id: "enterprise",
+    icon: "🏢",
+    title: "Enterprise Software",
+    desc: "Mission-critical platforms for large organisations. ERP modules, CRM systems, workflow engines, and data management solutions built to enterprise grade.",
+    pricing: "Request a Quote",
+    features: ["Custom ERP / CRM", "Role-based Access Control", "Audit Trails", "Multi-tenant Architecture", "SLA-backed Delivery"],
+  },
+  {
+    id: "devops",
+    icon: "⚙️",
+    title: "DevOps & Cloud Infrastructure",
+    desc: "From CI/CD pipelines to cloud architecture, we design and manage your infrastructure so your team can ship faster with confidence.",
+    pricing: "Request a Quote",
+    features: ["AWS / Azure / GCP", "Docker & Kubernetes", "CI/CD Pipelines", "Monitoring & Alerting", "Infrastructure as Code"],
+  },
+  {
+    id: "consulting",
+    icon: "🧭",
+    title: "Technical Consultancy",
+    desc: "Strategic technology advice for product teams, startups, and enterprises. Architecture reviews, technology selection, team upskilling, and roadmap planning.",
+    pricing: "Request a Quote",
+    features: ["Architecture Reviews", "Tech Stack Selection", "Code Audits", "Team Mentoring", "Roadmap Planning"],
+  },
+];
+
+const TECH_STACK = [
+  { icon: "⚛️", name: "React / Next.js", category: "Frontend" },
+  { icon: "🐍", name: "Python / FastAPI", category: "Backend" },
+  { icon: "📱", name: "React Native", category: "Mobile" },
+  { icon: "🐘", name: "PostgreSQL", category: "Database" },
+  { icon: "☁️", name: "AWS / EC2 / S3", category: "Cloud" },
+  { icon: "🐳", name: "Docker", category: "DevOps" },
+  { icon: "🔄", name: "n8n Automation", category: "Automation" },
+  { icon: "🤖", name: "OpenAI / LLMs", category: "AI" },
+];
+
 const BOOTCAMP_PHASES = [
   {
     number: "01",
@@ -774,6 +1108,57 @@ const BOOTCAMP_PHASES = [
     items: ["Introduction to FastAPI", "Build your own AI API", "Connect FastAPI → n8n", "Creating reusable automation services"],
   },
 ];
+
+/* ─────────────────────────────────────────────────
+   QUOTE MODAL
+───────────────────────────────────────────────── */
+function QuoteModal({ onClose, context = {} }) {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="modal-box">
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <div className="modal-title">Request a Quote</div>
+        <div className="modal-sub">
+          {context.title ? `${context.title} · ` : ""}Tell us what you need and we'll get back to you within 24 hours.
+        </div>
+        {!submitted ? (
+          <form className="modal-form" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Full Name *" required defaultValue={context.name || ""} />
+            <input type="email" placeholder="Email Address *" required />
+            <input type="tel" placeholder="WhatsApp / Phone Number" />
+            {context.service && (
+              <input type="text" placeholder="Service" defaultValue={context.service} readOnly style={{ color: "var(--gold)", borderColor: "var(--border)" }} />
+            )}
+            {context.grades && (
+              <select defaultValue={context.grade || ""}>
+                <option value="" disabled>Select Grade</option>
+                {[8, 9, 10, 11, 12].map(g => <option key={g} value={g}>Grade {g}</option>)}
+              </select>
+            )}
+            <textarea placeholder="Tell us more about your requirements..." rows={4} />
+            <button type="submit" className="btn-primary" style={{ marginTop: "0.5rem" }}>
+              Submit Request
+            </button>
+          </form>
+        ) : (
+          <div className="success-banner">
+            ✓ Thank you! We've received your request and will be in touch within 24 hours.<br />
+            <span style={{ fontSize: "0.78rem", marginTop: "0.5rem", display: "block" }}>
+              You can also WhatsApp us directly: <strong>073 929 8456</strong>
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 /* ─────────────────────────────────────────────────
    SHARED NAV + FOOTER
@@ -817,9 +1202,477 @@ function Footer({ onNavigate }) {
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Ace Group of Companies · Ace the Academia</span>
-        <span>South Africa · Reg. No. 2026/392557/07</span>
+        <span>South Africa · Reg. No. [Registration Number]</span>
       </div>
     </footer>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   EDUCATION PRODUCTS PAGE  (/education-products)
+───────────────────────────────────────────────── */
+function EducationProductsPage({ onNavigate, scrolled }) {
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage="education-products" scrolled={scrolled} />
+
+      {/* HERO */}
+      <section className="prod-hero">
+        <div className="prod-hero-bg" style={{
+          background: "radial-gradient(ellipse 70% 80% at 60% 30%, rgba(29,158,117,0.12) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 15% 80%, rgba(29,158,117,0.06) 0%, transparent 50%), var(--dark)"
+        }} />
+        <div className="prod-hero-grid" />
+        <div className="breadcrumb">
+          <a onClick={() => onNavigate("home")}>Home</a>
+          <span>/</span>
+          <a onClick={() => onNavigate("division", null, SERVICES.find(s => s.id === "education"))}>Education</a>
+          <span>/</span>
+          <span style={{ color: "var(--text-primary)" }}>Products</span>
+        </div>
+        <div className="div-hero-eyebrow">Ace the Academia · Education Products</div>
+        <h1 className="div-hero-title">
+          <span style={{ display: "block" }}>Learn.</span>
+          <span style={{ display: "block" }}><em>Grow.</em></span>
+          <span style={{ display: "block" }}>Excel.</span>
+        </h1>
+        <p className="div-hero-sub">
+          From Grade 8 tutoring to professional bootcamps — every product we offer is designed to close the gap between where you are and where you want to be.
+        </p>
+      </section>
+
+      <div className="prod-accent-green" />
+
+      {/* PRODUCT OVERVIEW TILES */}
+      <section style={{ padding: "6rem 4rem" }}>
+        <div className="section-tag">Our Education Products</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Two Paths.<br /><em>One Purpose.</em>
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "var(--border-dim)", border: "0.5px solid var(--border-dim)" }}>
+          {[
+            {
+              icon: "📐",
+              tag: "Grades 8–12",
+              title: "Private Tutoring",
+              desc: "One-on-one and small group sessions with expert tutors. Subject-specific support, exam preparation, and curriculum alignment — priced per grade.",
+              cta: "View Tutoring Plans",
+              page: "tutoring",
+              color: "var(--green)",
+            },
+            {
+              icon: "🤖",
+              tag: "Live Online · 6 Weeks",
+              title: "AI & Automation Bootcamp",
+              desc: "Hands-on training in n8n, APIs, AI Agents, and Cloud Deployment. For professionals and students ready to build real automation systems.",
+              cta: "View Bootcamp",
+              page: "events",
+              color: "var(--purple)",
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              style={{ background: "var(--dark-2)", padding: "4rem 3rem", cursor: "pointer", transition: "background 0.3s" }}
+              onMouseEnter={e => e.currentTarget.style.background = "var(--dark-3)"}
+              onMouseLeave={e => e.currentTarget.style.background = "var(--dark-2)"}
+              onClick={() => onNavigate(item.page)}
+            >
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{item.icon}</div>
+              <div style={{ fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: item.color, marginBottom: "0.8rem" }}>{item.tag}</div>
+              <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem", fontWeight: 300, marginBottom: "1rem" }}>{item.title}</div>
+              <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: 1.8, marginBottom: "2rem" }}>{item.desc}</p>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", fontSize: "0.75rem", letterSpacing: "0.16em", textTransform: "uppercase", color: item.color }}>
+                {item.cta} →
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="divider" />
+      <Footer onNavigate={onNavigate} />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   TUTORING PAGE  (/education-products/tutoring)
+───────────────────────────────────────────────── */
+function TutoringPage({ onNavigate, scrolled }) {
+  const [modal, setModal] = useState(null);
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
+
+  const openEnroll = (grade, price) => {
+    // In a real app this would link to a payment gateway with the grade + price
+    setModal({ service: `Grade ${grade} Tutoring`, title: `Grade ${grade} Tutoring — R${price}/month`, grade, grades: true });
+  };
+
+  const openQuote = (grade) => {
+    setModal({ service: `Grade ${grade} Tutoring — Custom Quote`, title: `Grade ${grade} Tutoring`, grade, grades: true });
+  };
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage="tutoring" scrolled={scrolled} />
+      {modal && <QuoteModal onClose={() => setModal(null)} context={modal} />}
+
+      {/* HERO */}
+      <section className="prod-hero">
+        <div className="prod-hero-bg" style={{
+          background: "radial-gradient(ellipse 70% 80% at 65% 25%, rgba(29,158,117,0.13) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,151,58,0.05) 0%, transparent 50%), var(--dark)"
+        }} />
+        <div className="prod-hero-grid" />
+        <div className="breadcrumb">
+          <a onClick={() => onNavigate("home")}>Home</a>
+          <span>/</span>
+          <a onClick={() => onNavigate("education-products")}>Education Products</a>
+          <span>/</span>
+          <span style={{ color: "var(--text-primary)" }}>Tutoring</span>
+        </div>
+        <div className="div-hero-eyebrow">Ace the Academia · Private Tutoring</div>
+        <h1 className="div-hero-title">
+          <span style={{ display: "block" }}>Expert</span>
+          <span style={{ display: "block" }}><em>Tutoring</em></span>
+          <span style={{ display: "block" }}>Grades 8–12</span>
+        </h1>
+        <p className="div-hero-sub">
+          Subject-focused, curriculum-aligned tutoring sessions that give learners the clarity, confidence, and competence to excel — from Grade 8 through to Matric.
+        </p>
+      </section>
+
+      <div className="prod-accent-green" />
+
+      {/* GRADES PRICING */}
+      <section className="grades-section">
+        <div className="section-tag">Choose Your Grade</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Transparent Pricing.<br /><em>No Hidden Fees.</em>
+        </h2>
+
+        <div className="grades-grid">
+          {TUTORING_GRADES.map(({ grade, price }) => (
+            <div className="grade-card" key={grade}>
+              <div className="grade-label">Grade</div>
+              <div className="grade-number">{grade}</div>
+              <div className="grade-price">
+                <span style={{ fontSize: "1rem", verticalAlign: "top", lineHeight: "1.8", color: "var(--gold)" }}>R</span>
+                {price.toLocaleString()}
+              </div>
+              <div className="grade-period">per month</div>
+              <button className="grade-btn" onClick={() => openEnroll(grade, price)}>
+                Enrol Now
+              </button>
+              <button className="grade-btn-ghost" onClick={() => openQuote(grade)}>
+                Request a Quote
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Subject list */}
+        <div style={{ borderTop: "0.5px solid var(--border-dim)", paddingTop: "3rem" }}>
+          <div className="section-tag">Subjects We Cover</div>
+          <div className="subjects-cloud">
+            {TUTORING_SUBJECTS.map(s => (
+              <div className="subject-tag" key={s}>{s}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT'S INCLUDED */}
+      <section style={{ padding: "6rem 4rem", background: "var(--dark-2)", borderTop: "0.5px solid var(--border-dim)", borderBottom: "0.5px solid var(--border-dim)" }}>
+        <div className="section-tag">Every Plan Includes</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem", fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}>
+          What You <em>Get</em>
+        </h2>
+        <div className="includes-grid">
+          {[
+            { icon: "📅", title: "Scheduled Weekly Sessions", text: "Consistent one-on-one or small group sessions on agreed days and times — via Zoom or in-person." },
+            { icon: "📝", title: "Exam Preparation", text: "Past paper practice, memorandum walkthroughs, and exam strategy coaching aligned to the CAPS curriculum." },
+            { icon: "📊", title: "Progress Reports", text: "Monthly written feedback highlighting strengths, improvement areas, and recommended focus topics." },
+            { icon: "💬", title: "WhatsApp Support", text: "Quick-answer support between sessions for homework questions and concept clarification." },
+            { icon: "📚", title: "Study Materials", text: "Curated notes, summaries, and practice exercises tailored to the learner's current syllabus topics." },
+            { icon: "🏆", title: "Goal-Oriented Tracking", text: "Target grades are set at enrolment and tracked monthly to keep learners and parents informed." },
+          ].map((item) => (
+            <div className="include-item" key={item.title}>
+              <div className="include-icon">{item.icon}</div>
+              <div className="include-title">{item.title}</div>
+              <div className="include-text">{item.text}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="steps-section">
+        <div className="section-tag">How It Works</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem", fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}>
+          Start in <em>Four Steps</em>
+        </h2>
+        <div className="steps-grid">
+          {[
+            { title: "Choose Your Grade", text: "Select the grade and preferred subjects. Not sure? Request a quote and we'll guide you." },
+            { title: "Pay & Confirm", text: "Complete payment via our secure gateway. Receive your confirmation within 24 hours." },
+            { title: "Meet Your Tutor", text: "We match you with a subject-specialist tutor and schedule your first session." },
+            { title: "Start Learning", text: "Attend your first session. We hit the ground running with a diagnostic and study plan." },
+          ].map((s, i) => (
+            <div className="step-item" key={i}>
+              <div className="step-num">0{i + 1}</div>
+              <div className="step-title">{s.title}</div>
+              <div className="step-text">{s.text}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* QUOTE FORM + CONTACT INFO */}
+      <section className="quote-form-section">
+        <div className="section-tag">Custom Requirements?</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "3rem" }}>
+          Request a <em>Tailored Quote</em>
+        </h2>
+        <div className="quote-form-inner">
+          <div>
+            <p style={{ fontSize: "1rem", color: "var(--text-muted)", lineHeight: 1.85, marginBottom: "1.5rem" }}>
+              Need tutoring for multiple subjects, a group of learners, or an irregular schedule? Fill in the form and we'll put together a custom proposal within 24 hours.
+            </p>
+            <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: 1.8, marginBottom: "2rem" }}>
+              You can also reach us directly via WhatsApp for a faster response:
+            </p>
+            <a
+              href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20tutoring%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              📱 WhatsApp: 073 929 8456
+            </a>
+            <div style={{ marginTop: "2rem", padding: "1.5rem", border: "0.5px solid var(--border-dim)", background: "var(--dark-2)" }}>
+              <div style={{ fontSize: "0.72rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.8rem" }}>Also Available</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
+                📧 <strong style={{ color: "var(--text-primary)" }}>4148924@myuwc.ac.za</strong><br />
+                We respond to all email enquiries within 24 hours on business days.
+              </div>
+            </div>
+          </div>
+          <form className="quote-form" onSubmit={(e) => { e.preventDefault(); setModal({ title: "Quote submitted!", service: "Tutoring" }); }}>
+            <div className="form-row">
+              <input type="text" placeholder="Learner's Name *" required />
+              <input type="text" placeholder="Parent / Guardian Name" />
+            </div>
+            <input type="email" placeholder="Email Address *" required />
+            <input type="tel" placeholder="WhatsApp / Phone *" required />
+            <select required>
+              <option value="" disabled selected>Select Grade *</option>
+              {[8, 9, 10, 11, 12].map(g => <option key={g} value={g}>Grade {g}</option>)}
+            </select>
+            <input type="text" placeholder="Subjects Required (e.g. Maths, Science)" />
+            <textarea placeholder="Any specific needs, preferred schedule, or questions?" />
+            <button type="submit" className="btn-green">Submit Quote Request</button>
+          </form>
+        </div>
+      </section>
+
+      {/* CTA STRIP */}
+      <section className="register-section" style={{ background: "var(--dark-2)", borderTop: "0.5px solid var(--border-dim)" }}>
+        <div className="section-tag" style={{ justifyContent: "center" }}>Grades 8–12 · CAPS Aligned</div>
+        <h2 className="cta-title">
+          Ready to <em>Start?</em>
+        </h2>
+        <p className="cta-sub">Enrol today and your learner's first session is just a payment away. Spots are limited per tutor.</p>
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <button className="btn-green" onClick={() => setModal({ service: "Tutoring Enquiry", grades: true })}>Enrol Now</button>
+          <button className="btn-ghost" onClick={() => onNavigate("education-products")}>All Products</button>
+        </div>
+      </section>
+
+      <div className="divider" />
+      <Footer onNavigate={onNavigate} />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   SOFTWARE PRODUCTS PAGE  (/software-products)
+───────────────────────────────────────────────── */
+function SoftwareProductsPage({ onNavigate, scrolled }) {
+  const [modal, setModal] = useState(null);
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage="software-products" scrolled={scrolled} />
+      {modal && <QuoteModal onClose={() => setModal(null)} context={modal} />}
+
+      {/* HERO */}
+      <section className="prod-hero">
+        <div className="prod-hero-bg softprod-hero-bg" />
+        <div className="softprod-hero-grid" />
+        <div className="breadcrumb">
+          <a onClick={() => onNavigate("home")}>Home</a>
+          <span>/</span>
+          <a onClick={() => onNavigate("division", null, SERVICES.find(s => s.id === "software"))}>Software Dev</a>
+          <span>/</span>
+          <span style={{ color: "var(--text-primary)" }}>Products & Services</span>
+        </div>
+        <div className="div-hero-eyebrow">Ace Group Software · Products & Services</div>
+        <h1 className="div-hero-title">
+          <span style={{ display: "block" }}>Build.</span>
+          <span style={{ display: "block" }}><em>Deploy.</em></span>
+          <span style={{ display: "block" }}>Scale.</span>
+        </h1>
+        <p className="div-hero-sub">
+          From mobile apps to enterprise systems — every solution we build is engineered for performance, built for Africa's realities, and designed to last.
+        </p>
+      </section>
+
+      <div className="prod-accent-blue" />
+
+      {/* SERVICES GRID */}
+      <section style={{ padding: "6rem 4rem" }}>
+        <div className="section-tag">What We Build</div>
+        <h2 className="section-title" style={{ marginBottom: "3rem" }}>
+          Our Software <em>Services</em>
+        </h2>
+        <div className="soft-services-grid">
+          {SOFTWARE_SERVICES.map((svc) => (
+            <div className="soft-service-card" key={svc.id}>
+              <div className="soft-card-icon">{svc.icon}</div>
+              <div className="soft-card-title">{svc.title}</div>
+              <div className="soft-card-desc">{svc.desc}</div>
+              <div className="soft-card-pricing">⊹ {svc.pricing}</div>
+              <ul style={{ listStyle: "none", marginBottom: "1.5rem" }}>
+                {svc.features.map(f => (
+                  <li key={f} style={{ fontSize: "0.78rem", color: "var(--text-muted)", padding: "0.2rem 0 0.2rem 1rem", position: "relative" }}>
+                    <span style={{ position: "absolute", left: 0, color: "var(--blue-light)" }}>·</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                className="soft-card-btn"
+                onClick={() => setModal({ service: svc.title, title: svc.title })}
+              >
+                Request a Quote
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="process-section" style={{ background: "var(--dark-2)", borderTop: "0.5px solid var(--border-dim)", borderBottom: "0.5px solid var(--border-dim)", padding: "6rem 4rem" }}>
+        <div className="section-tag">How We Work</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "4rem" }}>
+          Our <em>Process</em>
+        </h2>
+        <div className="process-steps">
+          {[
+            { title: "Discovery", text: "We learn your goals, users, and constraints through a structured scoping session." },
+            { title: "Proposal", text: "A detailed technical proposal with timeline, stack, and investment — within 48 hours." },
+            { title: "Design & Build", text: "Iterative delivery with regular demos. You see progress every week, not just at the end." },
+            { title: "Test & Deploy", text: "Rigorous QA, staging environment review, and production deployment with zero-downtime." },
+            { title: "Support", text: "Post-launch monitoring, bug fixes, and feature iterations. We don't disappear at go-live." },
+          ].map((step, i) => (
+            <div className="process-step" key={i}>
+              <div className="process-step-num">{i + 1}</div>
+              <div className="process-step-title">{step.title}</div>
+              <div className="process-step-text">{step.text}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* TECH STACK */}
+      <section style={{ padding: "6rem 4rem" }}>
+        <div className="section-tag">Built With</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "3rem" }}>
+          Our <em>Tech Stack</em>
+        </h2>
+        <div className="tech-stack-grid">
+          {TECH_STACK.map(t => (
+            <div className="tech-item" key={t.name}>
+              <div className="tech-icon">{t.icon}</div>
+              <div className="tech-name">{t.name}</div>
+              <div className="tech-category">{t.category}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* QUOTE FORM */}
+      <section className="quote-form-section" style={{ background: "var(--dark-2)", borderTop: "0.5px solid var(--border-dim)" }}>
+        <div className="section-tag">Start a Project</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "3rem" }}>
+          Request a <em>Project Quote</em>
+        </h2>
+        <div className="quote-form-inner">
+          <div>
+            <p style={{ fontSize: "1rem", color: "var(--text-muted)", lineHeight: 1.85, marginBottom: "1.5rem" }}>
+              Every great product starts with a conversation. Tell us what you're building and we'll come back to you with a tailored proposal — no obligation, no cost.
+            </p>
+            <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: 1.8, marginBottom: "2rem" }}>
+              For urgent enquiries, reach us directly:
+            </p>
+            <a
+              href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20software%20development%20project"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              📱 WhatsApp: 073 929 8456
+            </a>
+            <div style={{ marginTop: "2rem", padding: "1.5rem", border: "0.5px solid var(--border-dim)", background: "var(--dark-3)" }}>
+              <div style={{ fontSize: "0.72rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.8rem" }}>Response Time</div>
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
+                All enquiries receive an initial response within <strong style={{ color: "var(--text-primary)" }}>24 business hours</strong>. Detailed proposals follow within <strong style={{ color: "var(--text-primary)" }}>48–72 hours</strong>.
+              </div>
+            </div>
+          </div>
+          <form className="quote-form" onSubmit={(e) => { e.preventDefault(); setModal({ title: "Quote submitted!" }); }}>
+            <div className="form-row">
+              <input type="text" placeholder="Your Name *" required />
+              <input type="text" placeholder="Company / Organisation" />
+            </div>
+            <input type="email" placeholder="Email Address *" required />
+            <input type="tel" placeholder="WhatsApp / Phone *" required />
+            <select required>
+              <option value="" disabled selected>Service Required *</option>
+              {SOFTWARE_SERVICES.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}
+            </select>
+            <input type="text" placeholder="Estimated Budget Range (optional)" />
+            <textarea placeholder="Describe your project — what are you building, who is it for, and what problem does it solve?" rows={5} />
+            <button type="submit" className="soft-card-btn" style={{ padding: "1rem", fontSize: "0.8rem", letterSpacing: "0.14em" }}>
+              Submit Project Brief
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* BOTTOM CTA */}
+      <section className="register-section">
+        <div className="section-tag" style={{ justifyContent: "center" }}>South Africa · Global Standards</div>
+        <h2 className="cta-title">
+          Let's Build<br /><em>Something Great</em>
+        </h2>
+        <p className="cta-sub">Whether it's a weekend MVP or a year-long enterprise rollout — Ace Group Software is ready to deliver.</p>
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <button className="soft-card-btn" style={{ padding: "1rem 2.4rem", fontSize: "0.8rem", letterSpacing: "0.14em" }} onClick={() => setModal({ title: "Get Started" })}>
+            Get a Quote
+          </button>
+          <button className="btn-ghost" onClick={() => onNavigate("division", null, SERVICES.find(s => s.id === "software"))}>
+            About the Division
+          </button>
+        </div>
+      </section>
+
+      <div className="divider" />
+      <Footer onNavigate={onNavigate} />
+    </div>
   );
 }
 
@@ -833,7 +1686,6 @@ function EventsPage({ onNavigate, scrolled }) {
     <div className="page-enter">
       <Nav onNavigate={onNavigate} currentPage="events" scrolled={scrolled} />
 
-      {/* HERO */}
       <section className="events-hero">
         <div className="events-hero-bg" />
         <div className="events-grid-bg" />
@@ -851,7 +1703,6 @@ function EventsPage({ onNavigate, scrolled }) {
 
       <div className="events-accent" />
 
-      {/* FEATURED EVENT */}
       <section className="events-section">
         <div className="section-tag">Featured Event · Aug 2026</div>
         <h2 className="section-title" style={{ marginBottom: "2.5rem" }}>
@@ -873,22 +1724,10 @@ function EventsPage({ onNavigate, scrolled }) {
                 Learn how to build powerful AI-driven automations with n8n, APIs, AI Agents and Cloud Deployment. Hands-on. Practical. Transformative.
               </p>
               <div className="event-meta">
-                <div className="event-meta-item">
-                  <span className="event-meta-icon">📅</span>
-                  <span><strong>1 August – 6 September 2026</strong></span>
-                </div>
-                <div className="event-meta-item">
-                  <span className="event-meta-icon">🕐</span>
-                  <span><strong>6 Weeks</strong> · Live Online</span>
-                </div>
-                <div className="event-meta-item">
-                  <span className="event-meta-icon">🎥</span>
-                  <span>Via <strong>Online Video Conferencing</strong> · Live Sessions</span>
-                </div>
-                <div className="event-meta-item">
-                  <span className="event-meta-icon">📍</span>
-                  <span>South Africa · Remote</span>
-                </div>
+                <div className="event-meta-item"><span className="event-meta-icon">📅</span><span><strong>1 August – 6 September 2026</strong></span></div>
+                <div className="event-meta-item"><span className="event-meta-icon">🕐</span><span><strong>6 Weeks</strong> · Live Online</span></div>
+                <div className="event-meta-item"><span className="event-meta-icon">🎥</span><span>Via <strong>Zoom</strong> · Live Sessions</span></div>
+                <div className="event-meta-item"><span className="event-meta-icon">📍</span><span>South Africa · Remote</span></div>
               </div>
               <div className="event-includes">
                 {["Workflow Automation", "APIs & Integrations", "AI & LLM Integration", "AI Agents in n8n", "Cloud Deployment", "FastAPI Backend"].map(t => (
@@ -896,13 +1735,8 @@ function EventsPage({ onNavigate, scrolled }) {
                 ))}
               </div>
               <div className="event-actions">
-                <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScS5oj5yNyglolQuy6M5AiRhr5ugcc3g2zjgPaeW1lYEdcl4w/viewform"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="whatsapp-btn"
-                >
-                  📱 Fill the form
+                <a href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp" target="_blank" rel="noopener noreferrer" className="whatsapp-btn">
+                  📱 Register via WhatsApp
                 </a>
                 <button className="btn-ghost" onClick={() => document.getElementById("bootcamp-phases")?.scrollIntoView({ behavior: "smooth" })}>
                   View Curriculum
@@ -912,12 +1746,10 @@ function EventsPage({ onNavigate, scrolled }) {
 
             <div className="event-pricing">
               <div className="pricing-label">Full Bootcamp Investment</div>
-              <div className="pricing-amount">
-                <span className="pricing-currency">R</span>720
-              </div>
+              <div className="pricing-amount"><span className="pricing-currency">R</span>720</div>
               <div className="pricing-period">One-time payment · Full access</div>
               <ul className="pricing-features">
-                <li><span className="pricing-check">✓</span> Live interactive online classes </li>
+                <li><span className="pricing-check">✓</span> Live interactive classes via Zoom</li>
                 <li><span className="pricing-check">✓</span> Hands-on projects every week</li>
                 <li><span className="pricing-check">✓</span> Real-world automation systems</li>
                 <li><span className="pricing-check">✓</span> Templates & workflows included</li>
@@ -925,31 +1757,19 @@ function EventsPage({ onNavigate, scrolled }) {
                 <li><span className="pricing-check">✓</span> Lifetime access to resources</li>
                 <li><span className="pricing-check">✓</span> Support & community access</li>
               </ul>
-              <a
-                href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-purple"
-                style={{ width: "100%", textAlign: "center" }}
-              >
+              <a href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp" target="_blank" rel="noopener noreferrer" className="btn-purple" style={{ width: "100%", textAlign: "center" }}>
                 Book Your Spot
               </a>
-              <div className="pricing-note">
-                073 929 8456 · WhatsApp to register<br />
-                Limited slots — book today to secure your place.
-              </div>
+              <div className="pricing-note">073 929 8456 · WhatsApp to register<br />Limited slots — book today to secure your place.</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CURRICULUM */}
       <section id="bootcamp-phases" className="phases-section">
         <div style={{ padding: "0 0 4rem" }}>
           <div className="section-tag">6-Week Curriculum</div>
-          <h2 className="section-title" style={{ marginBottom: "3rem" }}>
-            What You'll <em>Learn</em>
-          </h2>
+          <h2 className="section-title" style={{ marginBottom: "3rem" }}>What You'll <em>Learn</em></h2>
         </div>
         <div className="phases-grid">
           {BOOTCAMP_PHASES.map((phase) => (
@@ -958,38 +1778,25 @@ function EventsPage({ onNavigate, scrolled }) {
               <div className="phase-days">{phase.days}</div>
               <div className="phase-title">{phase.title}</div>
               <ul className="phase-list">
-                {phase.items.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
+                {phase.items.map((item, i) => <li key={i}>{item}</li>)}
               </ul>
             </div>
           ))}
         </div>
       </section>
 
-      {/* REGISTER CTA */}
       <section className="register-section">
         <div className="section-tag" style={{ justifyContent: "center" }}>Automate Today. Lead Tomorrow.</div>
-        <h2 className="cta-title">
-          Ready to Build<br /><em>Real Automations?</em>
-        </h2>
-        <p className="cta-sub">
-          Spaces are limited. Join the AI n8n Automation Bootcamp and gain the skills to automate workflows, deploy AI agents, and build production-ready systems — in just 6 weeks.
-        </p>
+        <h2 className="cta-title">Ready to Build<br /><em>Real Automations?</em></h2>
+        <p className="cta-sub">Spaces are limited. Join the AI n8n Automation Bootcamp and gain the skills to automate workflows, deploy AI agents, and build production-ready systems — in just 6 weeks.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "1.5rem" }}>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScS5oj5yNyglolQuy6M5AiRhr5ugcc3g2zjgPaeW1lYEdcl4w/viewform"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-btn"
-            style={{ fontSize: "0.95rem", padding: "1.1rem 2.4rem" }}
-          >
-            form
+          <a href="https://wa.me/27739298456?text=Hi%2C%20I%27d%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp" target="_blank" rel="noopener noreferrer" className="whatsapp-btn" style={{ fontSize: "0.95rem", padding: "1.1rem 2.4rem" }}>
+            📱 WhatsApp: 073 929 8456
           </a>
-          <a href="mailto:aceacademia2022@gmail.com" className="btn-ghost">Email Us Instead</a>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-ghost">Email Us Instead</a>
         </div>
         <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", textAlign: "center" }}>
-          Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment or 2 payment plan of 360 on the first week and 4th week · 1 Aug – 6 Sep 2026
+          Hosted by <strong style={{ color: "var(--gold)" }}>Ace the Academia</strong> · R720 one-time payment · 1 Aug – 6 Sep 2026
         </p>
       </section>
 
@@ -1013,7 +1820,6 @@ function LegalPage({ type, onNavigate, scrolled }) {
         <>
           <h2>1. Introduction</h2>
           <p>Ace Group of Companies and Ace the Academia ("we", "our", "us") are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or register for our events and programmes, in accordance with the <strong>Protection of Personal Information Act 4 of 2013 (POPIA)</strong> of South Africa.</p>
-
           <h2>2. Information We Collect</h2>
           <p>We may collect the following personal information:</p>
           <ul>
@@ -1023,7 +1829,6 @@ function LegalPage({ type, onNavigate, scrolled }) {
             <li>Usage data and website interaction information</li>
             <li>Communications you send to us via email or WhatsApp</li>
           </ul>
-
           <h2>3. How We Use Your Information</h2>
           <p>We use your personal information to:</p>
           <ul>
@@ -1034,30 +1839,24 @@ function LegalPage({ type, onNavigate, scrolled }) {
             <li>Improve our services and develop new offerings</li>
             <li>Comply with legal and regulatory obligations</li>
           </ul>
-
           <h2>4. Sharing of Information</h2>
           <p>We do not sell your personal information to third parties. We may share your information with:</p>
           <ul>
             <li>Payment processing providers to facilitate transactions</li>
-            <li>Video conferencing platforms to deliver live sessions</li>
+            <li>Video conferencing platforms (Zoom) to deliver live sessions</li>
             <li>Service providers who assist in delivering our programmes</li>
             <li>Law enforcement or regulatory bodies where required by law</li>
           </ul>
-
           <h2>5. Data Retention</h2>
           <p>We retain your personal information for as long as necessary to fulfil the purposes outlined in this policy, or as required by law. Registration and payment records are retained for a minimum of 5 years for accounting and legal purposes.</p>
-
           <h2>6. Your Rights under POPIA</h2>
-          <p>You have the right to access, correct, or request deletion of your personal information. You may also object to processing or withdraw consent at any time. To exercise these rights, contact us at <strong>aceacademia2022@gmail.com</strong>.</p>
-
+          <p>You have the right to access, correct, or request deletion of your personal information. You may also object to processing or withdraw consent at any time. To exercise these rights, contact us at <strong>4148924@myuwc.ac.za</strong>.</p>
           <h2>7. Cookies</h2>
           <p>Our website may use cookies to improve your browsing experience. You can disable cookies through your browser settings, though this may affect certain website functionality.</p>
-
           <h2>8. Security</h2>
           <p>We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction.</p>
-
           <h2>9. Contact Us</h2>
-          <p>For any privacy-related queries, please contact us at: <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <p>For any privacy-related queries, please contact us at: <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1067,42 +1866,28 @@ function LegalPage({ type, onNavigate, scrolled }) {
       content: (
         <>
           <h2>1. Acceptance of Terms</h2>
-          <p>By accessing our website or registering for any programme offered by Ace Group of Companies and Ace the Academia ("we", "us", "our"), you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
-
+          <p>By accessing our website or registering for any programme offered by Ace Group of Companies and Ace the Academia ("we", "us", "our"), you agree to be bound by these Terms of Service.</p>
           <h2>2. Services Offered</h2>
-          <p>Ace the Academia offers live online bootcamps, training programmes, and educational events. Our flagship offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live online programme delivered via Online Video conferencing.</p>
-
+          <p>Ace the Academia offers live online bootcamps, private tutoring (Grades 8–12), training programmes, and educational events. Software development, technical consultancy, and related services are provided by Ace Group Software Development.</p>
           <h2>3. Registration and Enrolment</h2>
           <ul>
-            <li>Registration is confirmed upon receipt of full payment or  <strong>R360.00 </strong> deposit of <strong>R720.00</strong></li>
+            <li>Registration is confirmed upon receipt of full payment</li>
             <li>Spots are limited and allocated on a first-come, first-served basis</li>
-            <li>You will receive confirmation and joining details via WhatsApp or email within 48 hours of payment</li>
+            <li>You will receive confirmation within 48 hours of payment</li>
             <li>You must be at least 16 years of age to enrol, or have parental/guardian consent</li>
           </ul>
-
           <h2>4. Payment Terms</h2>
-          <p>All prices are quoted in South African Rand (ZAR) and include VAT where applicable. Payment must be made in full before access is granted. We accept payment via the methods specified at checkout. Secure payment processing is handled by our authorised payment gateway provider.</p>
-
+          <p>All prices are quoted in South African Rand (ZAR). Payment must be made in full before access is granted. Secure payment processing is handled by our authorised payment gateway provider.</p>
           <h2>5. Intellectual Property</h2>
-          <p>All course materials, content, recordings, templates, and workflows provided through our programmes are the intellectual property of Ace the Academia. You are granted a personal, non-transferable licence to use materials for your own learning. You may not resell, redistribute, or sublicense any course content without written permission.</p>
-
+          <p>All course materials, content, recordings, templates, and workflows are the intellectual property of Ace the Academia. You are granted a personal, non-transferable licence for your own learning purposes only.</p>
           <h2>6. Code of Conduct</h2>
-          <p>Participants are expected to engage respectfully in all live sessions and community spaces. We reserve the right to remove any participant who engages in disruptive, abusive, or inappropriate behaviour without refund.</p>
-
-          <h2>7. Technical Requirements</h2>
-          <p>Participants are responsible for ensuring they have a stable internet connection. We are not liable for technical issues on the participant's side.</p>
-
-          <h2>8. Limitation of Liability</h2>
-          <p>To the fullest extent permitted by South African law, Ace Group and Ace the Academia shall not be liable for any indirect, incidental, or consequential damages arising from participation in our programmes or use of our website.</p>
-
-          <h2>9. Governing Law</h2>
-          <p>These Terms are governed by the laws of the Republic of South Africa. Any disputes shall be subject to the jurisdiction of the South African courts.</p>
-
-          <h2>10. Changes to Terms</h2>
-          <p>We reserve the right to update these Terms at any time. Continued use of our services following notification of changes constitutes acceptance of the revised Terms.</p>
-
-          <h2>11. Contact</h2>
-          <p>Questions about these Terms? Contact us at <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <p>Participants are expected to engage respectfully in all sessions and community spaces. We reserve the right to remove any participant who engages in disruptive or inappropriate behaviour without refund.</p>
+          <h2>7. Limitation of Liability</h2>
+          <p>To the fullest extent permitted by South African law, Ace Group and Ace the Academia shall not be liable for any indirect, incidental, or consequential damages arising from participation in our programmes.</p>
+          <h2>8. Governing Law</h2>
+          <p>These Terms are governed by the laws of the Republic of South Africa.</p>
+          <h2>9. Contact</h2>
+          <p>Questions? Contact us at <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1112,43 +1897,31 @@ function LegalPage({ type, onNavigate, scrolled }) {
       content: (
         <>
           <h2>1. Overview</h2>
-          <p>Ace the Academia is committed to delivering high-quality training and education. We understand that circumstances change, and we aim to be fair and transparent in our refund process. This policy applies to all bootcamp and programme registrations.</p>
-
+          <p>Ace the Academia is committed to delivering high-quality training and education. This policy applies to all bootcamp, tutoring, and programme registrations.</p>
           <h2>2. Cooling-Off Period</h2>
-          <p>In accordance with the <strong>Consumer Protection Act 68 of 2008 (CPA)</strong> of South Africa, you have a 5 business day cooling-off period from the date of purchase during which you may cancel your registration and receive a full refund, provided the programme has not yet commenced.</p>
-
-          <h2>3. Cancellation Before Programme Start</h2>
+          <p>In accordance with the <strong>Consumer Protection Act 68 of 2008 (CPA)</strong> of South Africa, you have a 5 business day cooling-off period from the date of purchase during which you may cancel and receive a full refund, provided the service has not yet commenced.</p>
+          <h2>3. Tutoring Cancellations</h2>
           <ul>
-            <li><strong>More than 14 days before start date:</strong> Full refund, less a 10% administration fee</li>
-            <li><strong>7–14 days before start date:</strong> 50% refund</li>
-            <li><strong>Less than 7 days before start date:</strong> No refund, but your registration may be transferred to the next available cohort</li>
+            <li><strong>Before first session:</strong> Full refund, less 10% administration fee</li>
+            <li><strong>After first session only:</strong> 50% refund of the monthly fee</li>
+            <li><strong>After second session or more:</strong> No refund for that month's payment</li>
+            <li>Monthly tutoring may be cancelled with 5 business days' notice before the next billing cycle</li>
           </ul>
-
-          <h2>4. Cancellation After Programme Start</h2>
+          <h2>4. Bootcamp Cancellations</h2>
           <ul>
-            <li><strong>Within the first week (Week 1):</strong> 25% refund of the programme fee</li>
-            <li><strong>After Week 1:</strong> No refund is available once more than one week of the programme has been completed</li>
+            <li><strong>More than 14 days before start:</strong> Full refund, less 10% admin fee</li>
+            <li><strong>7–14 days before start:</strong> 50% refund</li>
+            <li><strong>Less than 7 days before start:</strong> No refund; registration may transfer to next cohort</li>
+            <li><strong>After Week 1:</strong> No refund available</li>
           </ul>
-
           <h2>5. Programme Cancellation by Ace the Academia</h2>
-          <p>In the unlikely event that we need to cancel a scheduled programme, all registered participants will receive a <strong>full refund</strong> within 7 business days, or the option to transfer to the next available cohort.</p>
-
-          <h2>6. Programme Postponement</h2>
-          <p>If a programme is postponed, participants will be offered the choice to transfer to the rescheduled date or receive a full refund.</p>
-
-          <h2>7. Non-Attendance</h2>
-          <p>No refund will be issued for non-attendance where the programme proceeds as scheduled. If you are unable to attend live sessions, you retain access to recordings and resources for the lifetime of your enrolment.</p>
-
-          <h2>8. How to Request a Refund</h2>
-          <p>To request a refund, contact us via:</p>
+          <p>If we cancel a scheduled programme, all registered participants receive a <strong>full refund</strong> within 7 business days, or the option to transfer to the next cohort.</p>
+          <h2>6. How to Request a Refund</h2>
           <ul>
-            <li>Email: <strong>aceacademia2022@gmail.com</strong></li>
+            <li>Email: <strong>4148924@myuwc.ac.za</strong></li>
             <li>WhatsApp: <strong>073 929 8456</strong></li>
           </ul>
-          <p>Please include your full name, registration details, and reason for cancellation. Refunds will be processed to the original payment method within <strong>7–10 business days</strong> of approval.</p>
-
-          <h2>9. Exceptional Circumstances</h2>
-          <p>We consider requests for refunds outside these terms in cases of serious illness or bereavement, subject to supporting documentation. These are assessed on a case-by-case basis at our discretion.</p>
+          <p>Refunds are processed to the original payment method within 7–10 business days of approval.</p>
         </>
       ),
     },
@@ -1158,56 +1931,33 @@ function LegalPage({ type, onNavigate, scrolled }) {
       content: (
         <>
           <h2>1. What We Deliver</h2>
-          <p>Ace the Academia delivers <strong>live online educational programmes and bootcamps</strong>. Our primary current offering is the <strong>AI n8n Automation Bootcamp</strong> — a 6-week live training programme conducted online.</p>
-          <p>All deliverables are <strong>digital in nature</strong>. We do not ship physical goods. This policy outlines what you can expect and when, from registration through to programme completion.</p>
-
-          <h2>2. Registration Confirmation</h2>
-          <p>After successful payment, you will receive:</p>
-          <ul>
-            <li>A registration confirmation message via WhatsApp or email <strong>within 24–48 hours</strong></li>
-            <li>Your enrolment number and participant details</li>
-            <li>A welcome message with preparation instructions</li>
-          </ul>
-
-          <h2>3. Pre-Programme Access (7 Days Before Start)</h2>
-          <p>Approximately <strong>7 days before the programme start date</strong>, participants will receive:</p>
-          <ul>
-            <li>Class meeting links for all scheduled live sessions</li>
-            <li>Access to the participant resource folder (templates, pre-reading material)</li>
-            <li>Community or group chat access for peer interaction</li>
-            <li>Technical setup guide to ensure your environment is ready</li>
-          </ul>
-
-          <h2>4. During the Programme (6 Weeks)</h2>
-          <p>The <strong>AI n8n Automation Bootcamp</strong> runs from <strong>1 August to 6 September 2026</strong>. Each week includes:</p>
-          <ul>
-            <li>Live Online sessions on scheduled days and times</li>
-            <li>Session recordings made available within <strong>24 hours</strong> of each live session</li>
-            <li>Weekly hands-on project tasks and workflow templates</li>
-            <li>Support access via WhatsApp and community channels</li>
-          </ul>
-
-          <h2>5. Programme Completion</h2>
-          <p>Upon successful completion of the programme, participants will receive:</p>
-          <ul>
-            <li>A digital <strong>Certificate of Completion</strong> issued within 5 business days of the programme end date</li>
-            <li>Lifetime access to all programme recordings and resources</li>
-            <li>Access to the alumni community network</li>
-          </ul>
-
-          <h2>6. Timeline Summary</h2>
+          <p>Ace the Academia delivers <strong>live online educational programmes, bootcamps, and tutoring services</strong>. All deliverables are digital in nature. We do not ship physical goods.</p>
+          <h2>2. Tutoring — Delivery Timeline</h2>
           <ul>
             <li><strong>Payment received:</strong> Confirmation within 24–48 hours</li>
-            <li><strong>7 days before start:</strong> All links, resources, and access delivered</li>
-            <li><strong>1 Aug – 6 Sep 2026:</strong> Live programme delivery (recordings within 24 hrs)</li>
+            <li><strong>Tutor matching:</strong> Within 2 business days of confirmed enrolment</li>
+            <li><strong>First session:</strong> Scheduled within 3–5 business days of matching</li>
+            <li><strong>Monthly progress report:</strong> Delivered within 3 business days of month end</li>
+          </ul>
+          <h2>3. Bootcamp — Delivery Timeline</h2>
+          <ul>
+            <li><strong>Payment received:</strong> Confirmation within 24–48 hours</li>
+            <li><strong>7 days before start:</strong> Zoom links, resources, and community access delivered</li>
+            <li><strong>1 Aug – 6 Sep 2026:</strong> Live programme (session recordings within 24 hrs)</li>
             <li><strong>Within 5 business days of end:</strong> Certificate of Completion issued</li>
           </ul>
-
-          <h2>7. Delays and Disruptions</h2>
-          <p>In the event of unforeseen technical disruptions to a live session, the session will be rescheduled and participants notified via WhatsApp as soon as possible. Recordings will be provided in the interim.</p>
-
-          <h2>8. Contact</h2>
-          <p>For delivery queries, contact us at <strong>aceacademia2022@gmail.com</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
+          <h2>4. Software Development — Delivery Timeline</h2>
+          <p>Software project timelines are agreed upon in the project proposal and vary by scope. As a general guide:</p>
+          <ul>
+            <li><strong>Quote request:</strong> Initial response within 24 business hours; detailed proposal within 48–72 hours</li>
+            <li><strong>Project kickoff:</strong> Within 5 business days of contract signing and deposit receipt</li>
+            <li><strong>MVP delivery:</strong> Typically 4–12 weeks depending on scope</li>
+            <li><strong>Full project:</strong> Timelines confirmed in the signed project agreement</li>
+          </ul>
+          <h2>5. Disruptions</h2>
+          <p>In the event of unforeseen disruptions, participants are notified via WhatsApp and alternative arrangements are made. Recordings are provided where live sessions are affected.</p>
+          <h2>6. Contact</h2>
+          <p>For delivery queries: <strong>4148924@myuwc.ac.za</strong> or WhatsApp <strong>073 929 8456</strong>.</p>
         </>
       ),
     },
@@ -1219,18 +1969,13 @@ function LegalPage({ type, onNavigate, scrolled }) {
   return (
     <div className="page-enter">
       <Nav onNavigate={onNavigate} currentPage={type} scrolled={scrolled} />
-
       <section className="legal-hero">
         <div className="legal-hero-bg" />
         <div className="div-back" onClick={() => onNavigate("home")}>← Back to Home</div>
         <div className="div-hero-eyebrow">Ace Group · Legal</div>
-        <h1 className="div-hero-title" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
-          {page.title}
-        </h1>
+        <h1 className="div-hero-title" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>{page.title}</h1>
       </section>
-
       <div className="divider" />
-
       <nav className="legal-nav">
         {[
           { key: "privacy", label: "Privacy Policy" },
@@ -1241,12 +1986,10 @@ function LegalPage({ type, onNavigate, scrolled }) {
           <a key={key} onClick={() => onNavigate(key)} className={type === key ? "active" : ""}>{label}</a>
         ))}
       </nav>
-
       <div className="legal-content">
         <div className="legal-meta">{page.updated} · Ace Group of Companies & Ace the Academia · South Africa</div>
         {page.content}
       </div>
-
       <div className="divider" />
       <Footer onNavigate={onNavigate} />
     </div>
@@ -1259,6 +2002,11 @@ function LegalPage({ type, onNavigate, scrolled }) {
 function DivisionPage({ division, onBack, onNavigate, scrolled }) {
   const related = SERVICES.filter((s) => s.id !== division.id).slice(0, 4);
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [division.id]);
+
+  // "View Products" CTA per division
+  const productPage = division.id === "education" ? "education-products"
+    : division.id === "software" ? "software-products"
+    : null;
 
   return (
     <div className="page-enter">
@@ -1286,8 +2034,13 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
           <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
             <span style={{ color: "var(--gold)" }}>Ace Group</span> · South Africa · Est. 2024
           </div>
-          <div style={{ marginTop: "2rem" }}>
-            <button className="btn-primary" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => document.getElementById("contact-div")?.scrollIntoView({ behavior: "smooth" })}>
+          <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+            {productPage && (
+              <button className="btn-primary" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => onNavigate(productPage)}>
+                View Products & Pricing
+              </button>
+            )}
+            <button className="btn-ghost" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => document.getElementById("contact-div")?.scrollIntoView({ behavior: "smooth" })}>
               Engage With Us
             </button>
           </div>
@@ -1332,6 +2085,13 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
             </div>
           ))}
         </div>
+        {productPage && (
+          <div style={{ marginTop: "3rem", textAlign: "center" }}>
+            <button className="btn-primary" onClick={() => onNavigate(productPage)}>
+              See Pricing & Products →
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="div-quote-section">
@@ -1365,7 +2125,7 @@ function DivisionPage({ division, onBack, onNavigate, scrolled }) {
         <h2 className="cta-title">Interested in<br /><em>{division.name}?</em></h2>
         <p className="cta-sub">Reach out to the Ace Group team and let's explore how our {division.name} division can serve your needs.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
-          <a href="mailto:aceacademia2022@gmail.com" className="btn-primary">Contact Us</a>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
           <button className="btn-ghost" onClick={onBack}>All Divisions</button>
         </div>
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
@@ -1442,10 +2202,36 @@ function HomePage({ onNavigate, scrolled }) {
           </div>
           <div>
             <span style={{ fontWeight: 500, color: "var(--text-primary)", fontSize: "0.9rem" }}>AI n8n Automation Bootcamp</span>
-            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>1 Aug – 6 Sep 2026 · R720 / 360 Deposit· Limited Spots</span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>1 Aug – 6 Sep 2026 · R720 · Limited Spots</span>
           </div>
         </div>
         <span style={{ color: "var(--purple-light)", fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>View Event →</span>
+      </div>
+
+      {/* TUTORING BANNER */}
+      <div
+        onClick={() => onNavigate("tutoring")}
+        style={{
+          background: "linear-gradient(135deg, rgba(29,158,117,0.1) 0%, rgba(201,151,58,0.05) 100%)",
+          border: "0.5px solid rgba(29,158,117,0.15)",
+          borderLeft: "3px solid var(--green)",
+          padding: "1.5rem 4rem",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          cursor: "pointer", transition: "background 0.3s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = "linear-gradient(135deg, rgba(29,158,117,0.16) 0%, rgba(201,151,58,0.07) 100%)"}
+        onMouseLeave={e => e.currentTarget.style.background = "linear-gradient(135deg, rgba(29,158,117,0.1) 0%, rgba(201,151,58,0.05) 100%)"}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <div style={{ background: "rgba(29,158,117,0.12)", border: "0.5px solid rgba(29,158,117,0.25)", padding: "0.3rem 0.8rem", fontSize: "0.65rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--green-light)" }}>
+            📐 Grades 8–12
+          </div>
+          <div>
+            <span style={{ fontWeight: 500, color: "var(--text-primary)", fontSize: "0.9rem" }}>Private Tutoring — Ace the Academia</span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.82rem", marginLeft: "1rem" }}>From R500/month · Enrol or Request a Quote</span>
+          </div>
+        </div>
+        <span style={{ color: "var(--green-light)", fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>View Plans →</span>
       </div>
 
       <section id="services" className="section">
@@ -1498,7 +2284,7 @@ function HomePage({ onNavigate, scrolled }) {
         <h2 className="cta-title">Ready to Build<br /><em>Something Great?</em></h2>
         <p className="cta-sub">Whether you're a partner, investor, or client — we'd love to hear from you. Let's create impact together across Africa and beyond.</p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
-          <a href="mailto:aceacademia2022@gmail.com" className="btn-primary">Contact Us</a>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
           <a href="#services" className="btn-ghost">View Services</a>
         </div>
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
@@ -1527,7 +2313,6 @@ export default function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // navigate(pageType, sectionId?, division?)
   const navigate = (type, section = null, division = null) => {
     if (type === "home" && section) {
       setPage({ type: "home", division: null });
@@ -1543,6 +2328,8 @@ export default function App() {
     }
   };
 
+  const legalPages = ["privacy", "terms", "refund", "delivery"];
+
   return (
     <>
       <style>{styles}</style>
@@ -1556,7 +2343,10 @@ export default function App() {
         />
       )}
       {page.type === "events" && <EventsPage onNavigate={navigate} scrolled={scrolled} />}
-      {["privacy", "terms", "refund", "delivery"].includes(page.type) && (
+      {page.type === "education-products" && <EducationProductsPage onNavigate={navigate} scrolled={scrolled} />}
+      {page.type === "tutoring" && <TutoringPage onNavigate={navigate} scrolled={scrolled} />}
+      {page.type === "software-products" && <SoftwareProductsPage onNavigate={navigate} scrolled={scrolled} />}
+      {legalPages.includes(page.type) && (
         <LegalPage type={page.type} onNavigate={navigate} scrolled={scrolled} />
       )}
     </>
