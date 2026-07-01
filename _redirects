@@ -1,0 +1,157 @@
+import { useEffect } from "react";
+import { useParams, Navigate } from "react-router-dom";
+import { SERVICES } from "../data";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+
+/* ─────────────────────────────────────────────────
+   DIVISION PAGE  (/services/:id)
+───────────────────────────────────────────────── */
+export default function DivisionPage({ onNavigate, scrolled }) {
+  const { id } = useParams();
+  const division = SERVICES.find((s) => s.id === id);
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [id]);
+
+  if (!division) return <Navigate to="/" replace />;
+
+  const related = SERVICES.filter((s) => s.id !== division.id).slice(0, 4);
+  const onBack = () => onNavigate("home", "services");
+
+  // "View Products" CTA per division
+  const productPage = division.id === "education" ? "education-products"
+    : division.id === "software" ? "software-products"
+    : null;
+
+  return (
+    <div className="page-enter">
+      <Nav onNavigate={onNavigate} currentPage="division" scrolled={scrolled} />
+
+      <section className="div-hero">
+        <div className="div-hero-bg" style={{ background: `radial-gradient(ellipse 70% 80% at 60% 40%, ${division.accentColor} 0%, transparent 60%), radial-gradient(ellipse 40% 50% at 15% 80%, ${division.accentColorStrong} 0%, transparent 50%), var(--dark)` }} />
+        <div className="div-hero-grid" />
+        <div className="div-back" onClick={onBack}>← Back to All Divisions</div>
+        <div className="div-hero-eyebrow">Division {division.number} · Ace Group</div>
+        <h1 className="div-hero-title">
+          {division.tagline.split("\n").map((line, i) => (
+            <span key={i} style={{ display: "block" }}>{i === 1 ? <em>{line}</em> : line}</span>
+          ))}
+        </h1>
+        <p className="div-hero-sub">{division.sub}</p>
+      </section>
+
+      <div className="div-accent" />
+
+      <div className="div-overview">
+        <div className="div-overview-left">
+          <div className="div-big-number">{division.number}</div>
+          <div className="section-tag">{division.name}</div>
+          <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
+            <span style={{ color: "var(--gold)" }}>Ace Group</span> · South Africa · Est. 2024
+          </div>
+          <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+            {productPage && (
+              <button className="btn-primary" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => onNavigate(productPage)}>
+                View Products & Pricing
+              </button>
+            )}
+            <button className="btn-ghost" style={{ fontSize: "0.75rem", padding: "0.75rem 1.8rem" }} onClick={() => document.getElementById("contact-div")?.scrollIntoView({ behavior: "smooth" })}>
+              Engage With Us
+            </button>
+          </div>
+        </div>
+        <div className="div-overview-right">
+          {division.overview.map((para, i) => (<p key={i} dangerouslySetInnerHTML={{ __html: para }} />))}
+        </div>
+      </div>
+
+      <div className="div-pillars">
+        {division.pillars.map((p, i) => (
+          <div className="div-pillar" key={i}>
+            <span className="div-pillar-icon">{p.icon}</span>
+            <div className="div-pillar-title">{p.title}</div>
+            <div className="div-pillar-text">{p.text}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="div-stats">
+        {division.stats.map((s, i) => (
+          <div className="div-stat" key={i}>
+            <div className="div-stat-num">{s.num}</div>
+            <div className="div-stat-lbl">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="div-offerings">
+        <div className="section-tag">What We Offer</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", marginBottom: "3rem" }}>
+          Our <em>{division.name}</em><br />Capabilities
+        </h2>
+        <div className="div-offerings-grid">
+          {division.offerings.map((o, i) => (
+            <div className="div-offering-item" key={i}>
+              <div className="div-offering-num">{String(i + 1).padStart(2, "0")}</div>
+              <div>
+                <div className="div-offering-title">{o.title}</div>
+                <div className="div-offering-text">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {productPage && (
+          <div style={{ marginTop: "3rem", textAlign: "center" }}>
+            <button className="btn-primary" onClick={() => onNavigate(productPage)}>
+              See Pricing & Products →
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="div-quote-section">
+        <div className="div-quote">{division.quote}</div>
+        <div className="div-quote-attr">{division.quoteAttr}</div>
+      </div>
+
+      <div className="divider" />
+
+      <div className="div-related">
+        <div className="section-tag">Explore More</div>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3vw, 2.6rem)", marginBottom: "2.5rem" }}>
+          Other <em>Divisions</em>
+        </h2>
+        <div className="div-related-grid">
+          {related.map((s) => (
+            <div className="div-related-card" key={s.id} onClick={() => onNavigate("division", null, s)}>
+              <div>
+                <div className="div-related-icon">{s.icon}</div>
+                <div className="div-related-name">{s.name}</div>
+                <div className="div-related-desc">{s.desc}</div>
+              </div>
+              <div className="div-related-arrow">→</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section id="contact-div" className="cta-section">
+        <div className="section-tag" style={{ justifyContent: "center" }}>Let's Connect</div>
+        <h2 className="cta-title">Interested in<br /><em>{division.name}?</em></h2>
+        <p className="cta-sub">Reach out to the Ace Group team and let's explore how our {division.name} division can serve your needs.</p>
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "3rem" }}>
+          <a href="mailto:4148924@myuwc.ac.za" className="btn-primary">Contact Us</a>
+          <button className="btn-ghost" onClick={onBack}>All Divisions</button>
+        </div>
+        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder={`Tell us about your ${division.name} needs...`} required />
+          <button type="submit" className="btn-primary">Send Message</button>
+        </form>
+      </section>
+
+      <Footer onNavigate={onNavigate} />
+    </div>
+  );
+}
