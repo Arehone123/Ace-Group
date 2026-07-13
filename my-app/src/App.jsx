@@ -13,6 +13,7 @@ import DeliveryTimeline from "./pages/legal/DeliveryTimeline";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import RefundPolicy from "./pages/legal/RefundPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
+import { getPreferredTheme, persistTheme } from "./theme";
 import "./styles.css";
 
 function getRoute() {
@@ -36,6 +37,7 @@ function NotFound() {
 
 export default function App() {
   const [route, setRoute] = useState(getRoute);
+  const [theme, setTheme] = useState(getPreferredTheme);
 
   useEffect(() => {
     const updateRoute = () => setRoute(getRoute());
@@ -46,6 +48,13 @@ export default function App() {
       window.removeEventListener("app:navigate", updateRoute);
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    persistTheme(theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((current) => (current === "light" ? "dark" : "light"));
 
   useEffect(() => {
     const pageTitle = route.pathname === "/" ? "Ace Group" : route.pathname.split("/").filter(Boolean).map((part) => part.replaceAll("-", " ")).join(" | ");
@@ -82,7 +91,7 @@ export default function App() {
 
   return (
     <>
-      <Nav pathname={route.pathname} />
+      <Nav pathname={route.pathname} theme={theme} onToggleTheme={toggleTheme} />
       <main className="page-shell" key={route.pathname}>{page}</main>
       <Footer />
     </>

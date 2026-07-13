@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { links } from "../data/site";
 import RouteLink from "./RouteLink";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -15,7 +16,7 @@ function isActive(pathname, to) {
   return pathname === to || pathname.startsWith(`${to}/`);
 }
 
-export default function Nav({ pathname }) {
+export default function Nav({ pathname, theme, onToggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,35 +47,41 @@ export default function Nav({ pathname }) {
         </span>
       </RouteLink>
 
-      <button
-        className="menu-toggle"
-        type="button"
-        aria-label="Toggle navigation"
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((value) => !value)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+      <div className="header-right">
+        <nav className={`primary-nav ${isOpen ? "is-open" : ""}`} aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <RouteLink
+              key={item.to}
+              to={item.to}
+              className={isActive(pathname, item.to) ? "is-active" : ""}
+            >
+              {item.label}
+            </RouteLink>
+          ))}
+          <a href={links.linkedin} target="_blank" rel="noreferrer" className="nav-social">
+            LinkedIn
+          </a>
+          <a href={links.payment} target="_blank" rel="noreferrer" className="nav-payment">
+            Pay Now
+          </a>
+        </nav>
 
-      <nav className={`primary-nav ${isOpen ? "is-open" : ""}`} aria-label="Primary navigation">
-        {navItems.map((item) => (
-          <RouteLink
-            key={item.to}
-            to={item.to}
-            className={isActive(pathname, item.to) ? "is-active" : ""}
+        <div className="header-controls">
+          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((value) => !value)}
           >
-            {item.label}
-          </RouteLink>
-        ))}
-        <a href={links.linkedin} target="_blank" rel="noreferrer" className="nav-social">
-          LinkedIn
-        </a>
-        <a href={links.payment} target="_blank" rel="noreferrer" className="nav-payment">
-          Pay Now
-        </a>
-      </nav>
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </div>
     </header>
   );
 }
