@@ -1,6 +1,7 @@
 ﻿import heroImage from "../assets/hero.png";
 import { bootcamp, company, links, services } from "../data/site";
 import RouteLink from "../components/RouteLink";
+import Seo from "../components/Seo";
 
 const proofPoints = [
   { value: "5", label: "Operating divisions" },
@@ -12,6 +13,11 @@ const proofPoints = [
 export default function Home() {
   return (
     <>
+      <Seo
+        title="Ace Group | Ace the Academia — Education, Software, AI &amp; Mobility in South Africa"
+        description="Ace Group of Companies and Ace the Academia: education, software, AI automation, transportation and EdTech in South Africa."
+        path="/"
+      />
       <section className="home-hero">
         <div className="hero-copy">
           <p className="eyebrow">{company.location} | {company.established}</p>

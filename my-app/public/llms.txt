@@ -1,0 +1,35 @@
+# Ace Group (Ace the Academia)
+
+> Ace Group of Companies is a South African venture group, established in 2024, operating five divisions across education, software development, AI automation, transportation and educational technology. Trading academy brand: Ace the Academia. The group builds practical products for real-world impact, designed for South African users, infrastructure and operating conditions.
+
+## About
+
+- Name: Ace Group of Companies (also "Ace Group"); academy brand "Ace the Academia"
+- Founded: 2024, South Africa
+- Focus: useful products, careful delivery and measurable outcomes
+- Contact: aceacademia2022@gmail.com
+- LinkedIn: https://www.linkedin.com/company/ace-the-academia/
+
+## Divisions
+
+- [Education](https://acesoftwares.tech/divisions/education): Transformative learning programmes, academic support and institutional training.
+- [Software Development](https://acesoftwares.tech/divisions/software-development): Bespoke web, mobile and enterprise systems from concept to deployment.
+- [AI and Automation Engineering](https://acesoftwares.tech/divisions/ai-automation): AI workflows, agents and automation systems that reduce manual work.
+- [eHailing and Transportation](https://acesoftwares.tech/divisions/ehailing-transportation): Mobility, driver tools and transport technology for South African routes.
+- [Educational Technology](https://acesoftwares.tech/divisions/educational-technology): Digital learning platforms, assessment tools and learner analytics.
+
+## Programmes
+
+- [AI n8n Automation Bootcamp](https://acesoftwares.tech/events): 6-week live online programme (via Zoom), 1 August - 6 September 2026. Current price: R720. Register via WhatsApp (+27 73 929 8456) or pay via iKhokha.
+
+## Tutoring
+
+- [Online Tutoring](https://acesoftwares.tech/tutoring): Online tutoring by Ace the Academia for Grade 11, Grade 12, matric-upgrade and university students. High-school focus: Mathematics, Mathematical Literacy, Physical Sciences. University focus: UWC Computer Science, Statistics and first/second-year Mathematics. Formats: one-on-one, group classes and weekend exam bootcamps. Delivered online via Zoom or Google Meet; register on WhatsApp.
+
+## Pages
+
+- [About](https://acesoftwares.tech/about)
+- [Divisions](https://acesoftwares.tech/divisions)
+- [Tutoring](https://acesoftwares.tech/tutoring)
+- [Events](https://acesoftwares.tech/events)
+- [Contact](https://acesoftwares.tech/contact)

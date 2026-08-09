@@ -1,19 +1,35 @@
-﻿import ContactForm from "../components/ContactForm";
+import { useParams } from "react-router-dom";
+import ContactForm from "../components/ContactForm";
 import PageHeader from "../components/PageHeader";
 import RouteLink from "../components/RouteLink";
+import Seo from "../components/Seo";
 import { services } from "../data/site";
+import NotFound from "./NotFound";
 
-export default function DivisionDetail({ service }) {
+export default function DivisionDetail() {
+  const { slug } = useParams();
+  const service = services.find((item) => item.slug === slug);
+
+  if (!service) return <NotFound />;
+
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
 
   return (
     <>
+      <Seo
+        title={`${service.name} | Ace Group`}
+        description={service.summary}
+        path={`/divisions/${service.slug}`}
+      />
       <PageHeader
         eyebrow={`Division ${service.number}`}
         title={service.tagline.join(" ")}
         lead={service.intro}
       >
         <RouteLink to="/contact" className="btn btn-primary">Start a Conversation</RouteLink>
+        {service.slug === "education" && (
+          <RouteLink to="/tutoring" className="btn btn-secondary">View Tutoring</RouteLink>
+        )}
         <RouteLink to="/divisions" className="btn btn-secondary">All Divisions</RouteLink>
       </PageHeader>
 
@@ -88,7 +104,10 @@ export default function DivisionDetail({ service }) {
           <p className="eyebrow">Enquire</p>
           <h2>Talk to us about {service.name}.</h2>
         </div>
-        <ContactForm subject={`${service.name} enquiry`} message={`Tell us what you need from ${service.name}.`} />
+        <ContactForm
+          defaultMessage={`Hi Ace Group, I'd like to find out more about your ${service.name} division. Could you share some details?`}
+          placeholder={`Tell us what you need from ${service.name}...`}
+        />
       </section>
     </>
   );

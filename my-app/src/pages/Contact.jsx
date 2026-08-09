@@ -1,10 +1,16 @@
 ﻿import ContactForm from "../components/ContactForm";
 import PageHeader from "../components/PageHeader";
+import Seo from "../components/Seo";
 import { links } from "../data/site";
 
 export default function Contact() {
   return (
     <>
+      <Seo
+        title="Contact Ace Group | Ace the Academia"
+        description="Get in touch with Ace Group for programme support, division enquiries, partnerships, software work or AI automation projects. Reach us on WhatsApp or email."
+        path="/contact"
+      />
       <PageHeader
         eyebrow="Contact"
         title="Start with a clear message. We will route it to the right division."
