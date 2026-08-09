@@ -90,3 +90,22 @@ export const tutoring = {
 
   team: "Our current tutoring team includes Mayimunah Nagayi and Arehone. Additional tutors are added only after their subjects, experience and availability have been confirmed.",
 };
+
+// Indicative "from" pricing (per month), flexible and negotiable.
+export const pricing = {
+  note: "Rates below are a starting point, charged per month. Pricing is flexible and negotiable — the final rate is confirmed on WhatsApp. A 50% deposit secures your spot.",
+  highSchoolMaths: [
+    { grade: "Grade 10", group: "R250", oneOnOne: "R250" },
+    { grade: "Grade 11", group: "R250", oneOnOne: "R350" },
+    { grade: "Grade 12", group: "R350", oneOnOne: "R450" },
+  ],
+  highSchoolOther:
+    "Physical Sciences and Mathematical Literacy: rates on request and negotiable — message us for a quote.",
+  university: [
+    { name: "Computer Science", detail: "Any undergraduate level — theory and practical.", price: "from R1000", unit: "/ month" },
+    { name: "Coding / Web Development", detail: "HTML, CSS, JavaScript, Node.js and SQL — 10 lessons.", price: "from R1200", unit: "/ month" },
+    { name: "Programming assignment help", detail: "Guidance and feedback on your own work — we don't complete assignments for you.", price: "from R250", unit: "/ assignment" },
+  ],
+  universityOther:
+    "Statistics and university Mathematics: rates on request and negotiable — message us for a quote.",
+};
