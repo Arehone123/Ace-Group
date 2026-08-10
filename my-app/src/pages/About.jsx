@@ -1,5 +1,6 @@
 ﻿import PageHeader from "../components/PageHeader";
 import RouteLink from "../components/RouteLink";
+import Seo from "../components/Seo";
 import { company, links } from "../data/site";
 
 const values = [
@@ -12,6 +13,11 @@ const values = [
 export default function About() {
   return (
     <>
+      <Seo
+        title="About Ace Group | Ace the Academia"
+        description="Ace Group of Companies is a South African multi-sector group connecting education, software, AI automation, mobility and EdTech through focused divisions."
+        path="/about"
+      />
       <PageHeader
         eyebrow="About Ace Group"
         title="A South African group turning capability into practical systems."

@@ -24,6 +24,7 @@ export default function Footer() {
             <h2>Explore</h2>
             <RouteLink to="/about">About</RouteLink>
             <RouteLink to="/divisions">Divisions</RouteLink>
+            <RouteLink to="/tutoring">Tutoring</RouteLink>
             <RouteLink to="/events">Events</RouteLink>
             <RouteLink to="/contact">Contact</RouteLink>
           </div>

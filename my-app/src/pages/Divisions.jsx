@@ -1,10 +1,16 @@
 ﻿import PageHeader from "../components/PageHeader";
 import RouteLink from "../components/RouteLink";
+import Seo from "../components/Seo";
 import { services } from "../data/site";
 
 export default function Divisions() {
   return (
     <>
+      <Seo
+        title="Our Divisions | Ace Group"
+        description="Five focused divisions under Ace Group: Education, Software Development, AI and Automation Engineering, eHailing and Transportation, and Educational Technology."
+        path="/divisions"
+      />
       <PageHeader
         eyebrow="Ace Group divisions"
         title="Focused business lines with one shared standard."
