@@ -168,7 +168,7 @@ export const bootcamp = {
   title: "AI n8n Automation Bootcamp",
   host: "Ace the Academia",
   price: "R720",
-  dateRange: "1 August - 6 September 2026",
+  dateRange: "Starts 29 August 2026",
   duration: "6 weeks",
   delivery: "Live online via Zoom",
   paymentLink: links.payment,

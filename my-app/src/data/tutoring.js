@@ -91,21 +91,43 @@ export const tutoring = {
   team: "Our current tutoring team includes Mayimunah Nagayi and Arehone. Additional tutors are added only after their subjects, experience and availability have been confirmed.",
 };
 
-// Indicative "from" pricing (per month), flexible and negotiable.
+// Pricing — per student, per month. Flexible and negotiable.
 export const pricing = {
-  note: "Rates below are a starting point, charged per month. Pricing is flexible and negotiable — the final rate is confirmed on WhatsApp. A 50% deposit secures your spot.",
-  highSchoolMaths: [
-    { grade: "Grade 10", group: "R250", oneOnOne: "R250" },
-    { grade: "Grade 11", group: "R250", oneOnOne: "R350" },
-    { grade: "Grade 12", group: "R350", oneOnOne: "R450" },
-  ],
-  highSchoolOther:
-    "Physical Sciences and Mathematical Literacy: rates on request and negotiable — message us for a quote.",
-  university: [
-    { name: "Computer Science", detail: "Any undergraduate level — theory and practical.", price: "from R1000", unit: "/ month" },
-    { name: "Coding / Web Development", detail: "HTML, CSS, JavaScript, Node.js and SQL — 10 lessons.", price: "from R1200", unit: "/ month" },
-    { name: "Programming assignment help", detail: "Guidance and feedback on your own work — we don't complete assignments for you.", price: "from R250", unit: "/ assignment" },
-  ],
-  universityOther:
-    "Statistics and university Mathematics: rates on request and negotiable — message us for a quote.",
+  note: "All rates are per student, per month, and are flexible and negotiable — the final rate is confirmed on WhatsApp. A 50% deposit secures your spot.",
+  highSchool: {
+    schedule: "2 classes per week",
+    tiers: [
+      { label: "Group classes", price: "R550", per: "per student / month" },
+      { label: "One-on-one", price: "R1000", per: "per student / month" },
+    ],
+    note: "Covers Mathematics, Mathematical Literacy and Physical Sciences. Grade 10 available on request.",
+  },
+  university: {
+    schedule: "2 lessons per week · 2 hours each",
+    tiers: [
+      { label: "Group classes", price: "R700", per: "per student / month" },
+      { label: "One-on-one", price: "R1200", per: "per student / month" },
+    ],
+    note: "Computer Science, Statistics and Mathematics. Programming assignment guidance available on request.",
+  },
 };
+
+// Tutors — trust cards on the tutoring page.
+export const tutors = [
+  {
+    name: "Mayimunah Nagayi",
+    photo: "/tutors/mayimunah.jpg",
+    role: "Co-founder & Tutor",
+    qualification: "MSc Computer Science candidate · BSc Computer Science (Summa Cum Laude), UWC",
+    highlight: "UWC 2024 Institution Top Graduate Achiever and 4× Dean's Merit Awardee. Graduate Research Assistant, with 2 years' experience as a Graduate Lecturing Assistant.",
+    subjects: "Maths · Maths Literacy · Physical Sciences · Computer Science · Statistics · AI & Automation",
+  },
+  {
+    name: "Arehone Matodzi",
+    photo: "/tutors/arehone.jpg",
+    role: "Founder & Lead Tutor",
+    qualification: "BSc Honours Computer Science, UWC · AI Engineer & Data Analyst",
+    highlight: "n8n Cape Town Ambassador, MozFest Wrangler and 8× Microsoft Certified. 2× hackathon winner, former UWC IT Society President, and founder of Ace the Academia.",
+    subjects: "Maths · Maths Literacy · Physical Sciences · Computer Science · Coding & Web Dev · AI & Automation",
+  },
+];
