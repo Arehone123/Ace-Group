@@ -39,7 +39,7 @@
       },
       {
         title: "8. Contact",
-        paragraphs: ["For privacy queries, contact us at 4148924@myuwc.ac.za or WhatsApp 073 929 8456."]
+        paragraphs: ["For privacy queries, contact us at aceacademia2022@gmail.com or WhatsApp 073 929 8456."]
       }
     ]
   },
@@ -86,7 +86,7 @@
       },
       {
         title: "10. Contact",
-        paragraphs: ["For questions about these terms, contact 4148924@myuwc.ac.za or WhatsApp 073 929 8456."]
+        paragraphs: ["For questions about these terms, contact aceacademia2022@gmail.com or WhatsApp 073 929 8456."]
       }
     ]
   },
@@ -121,7 +121,7 @@
       },
       {
         title: "7. How to Request a Refund",
-        paragraphs: ["Email 4148924@myuwc.ac.za or WhatsApp 073 929 8456 with your full name, registration details and reason for cancellation. Approved refunds are processed to the original payment method where possible."]
+        paragraphs: ["Email aceacademia2022@gmail.com or WhatsApp 073 929 8456 with your full name, registration details and reason for cancellation. Approved refunds are processed to the original payment method where possible."]
       },
       {
         title: "8. Exceptional Circumstances",
@@ -148,7 +148,7 @@
       },
       {
         title: "4. Programme Delivery",
-        paragraphs: ["The AI n8n Automation Bootcamp is scheduled for 1 August to 6 September 2026. It is delivered live online over 6 weeks, with recordings and resources shared according to the programme schedule."]
+        paragraphs: ["The AI n8n Automation Bootcamp is scheduled to start on 29 August 2026. It is delivered live online over 6 weeks, with recordings and resources shared according to the programme schedule."]
       },
       {
         title: "5. Completion",
@@ -156,7 +156,7 @@
       },
       {
         title: "6. Timeline Summary",
-        list: ["Payment received: confirmation within 24 to 48 hours", "7 days before start: programme access details shared", "1 August to 6 September 2026: live programme delivery", "Within 5 business days after completion: digital certificate issued"]
+        list: ["Payment received: confirmation within 24 to 48 hours", "7 days before start: programme access details shared", "From 29 August 2026: live programme delivery over 6 weeks", "Within 5 business days after completion: digital certificate issued"]
       },
       {
         title: "7. Delays and Disruptions",
@@ -164,7 +164,7 @@
       },
       {
         title: "8. Contact",
-        paragraphs: ["For delivery queries, contact 4148924@myuwc.ac.za or WhatsApp 073 929 8456."]
+        paragraphs: ["For delivery queries, contact aceacademia2022@gmail.com or WhatsApp 073 929 8456."]
       }
     ]
   }

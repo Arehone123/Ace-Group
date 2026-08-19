@@ -3,7 +3,7 @@ import PageHeader from "../components/PageHeader";
 import RouteLink from "../components/RouteLink";
 import Seo from "../components/Seo";
 import { links } from "../data/site";
-import { tutoring, pricing } from "../data/tutoring";
+import { tutoring, pricing, tutors } from "../data/tutoring";
 
 const registerMessage =
   "Hi Ace the Academia, I'd like to register for tutoring.\n\n" +
@@ -71,6 +71,35 @@ export default function Tutoring() {
         </div>
       </section>
 
+      {/* ---------------- MEET YOUR TUTORS ---------------- */}
+      <section className="section-block muted-section">
+        <div className="section-heading">
+          <p className="eyebrow">Meet your tutors</p>
+          <h2>Learn from people who've excelled themselves.</h2>
+        </div>
+        <div className="tutor-grid">
+          {tutors.map((t) => (
+            <article className="tutor-card" key={t.name}>
+              <img
+                className="tutor-photo"
+                src={t.photo}
+                alt={t.name}
+                loading="lazy"
+                width="96"
+                height="96"
+              />
+              <div className="tutor-body">
+                <h3>{t.name}</h3>
+                <p className="tutor-role">{t.role}</p>
+                <p className="tutor-qual">{t.qualification}</p>
+                <p className="tutor-highlight">{t.highlight}</p>
+                <p className="tutor-subjects">{t.subjects}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ---------------- HIGH SCHOOL ---------------- */}
       <section className="section-block">
         <div className="section-heading">
@@ -85,27 +114,19 @@ export default function Tutoring() {
 
         <p className="price-note">{pricing.note}</p>
 
-        <div className="module-accordions">
-          <details className="module-accordion" open>
-            <summary>
-              <span className="summary-title">
-                Mathematics pricing
-                <span className="summary-hint">per grade, per month — tap to view</span>
+        <div className="price-grid">
+          {pricing.highSchool.tiers.map((t) => (
+            <article className="value-card price-card" key={t.label}>
+              <h3>{t.label}</h3>
+              <span className="price-tag">
+                {t.price}
+                <span className="price-unit">{t.per}</span>
               </span>
-            </summary>
-            <ul className="module-list">
-              {pricing.highSchoolMaths.map((row) => (
-                <li key={row.grade}>
-                  <span className="mod-year">{row.grade}</span>
-                  Group class <span className="mod-price">from {row.group}</span>
-                  {" · "}One-on-one <span className="mod-price">from {row.oneOnOne}</span>
-                  <span className="summary-hint">per month</span>
-                </li>
-              ))}
-            </ul>
-          </details>
-          <p className="on-request-note">{pricing.highSchoolOther}</p>
+              <p className="price-schedule">{pricing.highSchool.schedule}</p>
+            </article>
+          ))}
         </div>
+        <p className="on-request-note">{pricing.highSchool.note}</p>
       </section>
 
       {/* ---------------- UNIVERSITY ---------------- */}
@@ -116,20 +137,19 @@ export default function Tutoring() {
           <p>{tutoring.university.note}</p>
         </div>
 
-        <div className="value-grid three-col">
-          {pricing.university.map((item) => (
-            <article className="value-card" key={item.name}>
-              <h3>{item.name}</h3>
-              <p>{item.detail}</p>
+        <div className="price-grid">
+          {pricing.university.tiers.map((t) => (
+            <article className="value-card price-card" key={t.label}>
+              <h3>{t.label}</h3>
               <span className="price-tag">
-                {item.price}
-                <span className="price-unit">{item.unit}</span>
+                {t.price}
+                <span className="price-unit">{t.per}</span>
               </span>
+              <p className="price-schedule">{pricing.university.schedule}</p>
             </article>
           ))}
         </div>
-
-        <p className="on-request-note">{pricing.universityOther}</p>
+        <p className="on-request-note">{pricing.university.note}</p>
 
         <div className="section-heading narrow-heading">
           <p className="eyebrow">Modules we cover</p>

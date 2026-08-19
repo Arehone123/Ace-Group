@@ -8,7 +8,7 @@ export default function Events() {
     <>
       <Seo
         title="AI n8n Automation Bootcamp | Ace the Academia"
-        description="A 6-week live online bootcamp (1 Aug – 6 Sep 2026) on building AI-powered automations with n8n, APIs, AI agents and cloud deployment. R720 once-off."
+        description="A 6-week live online bootcamp (starts 29 August 2026) on building AI-powered automations with n8n, APIs, AI agents and cloud deployment. R720 once-off."
         path="/events"
       />
       <PageHeader
