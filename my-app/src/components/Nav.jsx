@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { links } from "../data/site";
 import RouteLink from "./RouteLink";
 import ThemeToggle from "./ThemeToggle";
@@ -7,6 +8,7 @@ const navItems = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Divisions", to: "/divisions" },
+  { label: "Tutoring", to: "/tutoring" },
   { label: "Events", to: "/events" },
   { label: "Contact", to: "/contact" },
   { label: "Register", to: "/register" },
@@ -17,7 +19,8 @@ function isActive(pathname, to) {
   return pathname === to || pathname.startsWith(`${to}/`);
 }
 
-export default function Nav({ pathname, theme, onToggleTheme }) {
+export default function Nav({ theme, onToggleTheme }) {
+  const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,15 +31,10 @@ export default function Nav({ pathname, theme, onToggleTheme }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu whenever the route changes.
   useEffect(() => {
-    const closeMenu = () => setIsOpen(false);
-    window.addEventListener("popstate", closeMenu);
-    window.addEventListener("app:navigate", closeMenu);
-    return () => {
-      window.removeEventListener("popstate", closeMenu);
-      window.removeEventListener("app:navigate", closeMenu);
-    };
-  }, []);
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <header className={`site-header ${isScrolled || isOpen ? "is-solid" : ""}`}>

@@ -2,6 +2,7 @@
   payment: "https://securepay.ikhokha.com/dmr22t2b1jjm2vd",
   linkedin: "https://www.linkedin.com/company/ace-the-academia/?viewAsMember=true",
   whatsapp: "https://wa.me/27739298456?text=Hi%2C%20I%20would%20like%20to%20register%20for%20the%20AI%20n8n%20Automation%20Bootcamp.",
+  whatsappNumber: "27739298456",
   email: "aceacademia2022@gmail.com",
   phone: "073 929 8456",
 };
@@ -167,7 +168,7 @@ export const bootcamp = {
   title: "AI n8n Automation Bootcamp",
   host: "Ace the Academia",
   price: "R720",
-  dateRange: "1 August - 6 September 2026",
+  dateRange: "Starts 29 August 2026",
   duration: "6 weeks",
   delivery: "Live online via Zoom",
   paymentLink: links.payment,
