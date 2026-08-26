@@ -9,6 +9,7 @@ import DivisionDetail from "./pages/DivisionDetail";
 import Divisions from "./pages/Divisions";
 import Events from "./pages/Events";
 import Home from "./pages/Home";
+import Register from "./pages/Register";
 import DeliveryTimeline from "./pages/legal/DeliveryTimeline";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import RefundPolicy from "./pages/legal/RefundPolicy";
@@ -75,6 +76,7 @@ export default function App() {
     if (route.pathname === "/divisions") return <Divisions />;
     if (route.pathname === "/events") return <Events />;
     if (route.pathname === "/contact") return <Contact />;
+    if (route.pathname === "/register") return <Register />;
     if (route.pathname === "/privacy-policy") return <PrivacyPolicy />;
     if (route.pathname === "/terms-of-service") return <TermsOfService />;
     if (route.pathname === "/refund-policy") return <RefundPolicy />;

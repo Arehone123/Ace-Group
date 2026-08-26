@@ -9,6 +9,7 @@ const navItems = [
   { label: "Divisions", to: "/divisions" },
   { label: "Events", to: "/events" },
   { label: "Contact", to: "/contact" },
+  { label: "Register", to: "/register" },
 ];
 
 function isActive(pathname, to) {
